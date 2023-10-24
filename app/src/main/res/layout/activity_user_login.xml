@@ -49,6 +49,7 @@
                 android:id="@+id/userPhoneNumberWithMsg"
                 android:layout_width="280dp"
                 android:layout_height="60dp"
+                android:inputType="number"
                 android:hint="  请输入手机号"
                 android:textSize="20sp"
                 android:background="@null"

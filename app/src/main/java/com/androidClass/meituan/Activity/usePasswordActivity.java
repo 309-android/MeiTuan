@@ -8,14 +8,26 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.androidClass.meituan.R;
+import com.androidClass.meituan.utils.OKHttpUtils;
+import com.google.gson.Gson;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class usePasswordActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +87,27 @@ public class usePasswordActivity extends AppCompatActivity {
         login_button.setOnClickListener(v->{
             String phoneNumber = userPhoneNumberWithPwd.getText().toString();
             String password = userPassword.getText().toString();
+            Map<String,Object> map = new HashMap<>();
+            map.put("phoneNumber",phoneNumber);
+            map.put("password",password);
+            OKHttpUtils okHttpUtils = new OKHttpUtils();
+            okHttpUtils.POST_JSON("/user/login",map);
+//            okHttpUtils.get("/user/test");
+            okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
+                @Override
+                public void error(String error) {
+
+                }
+
+                @Override
+                public void success(String json) {
+                    Gson gson = new Gson();
+                    String msg = gson.fromJson(json, String.class);
+                    if("success".equals(msg)){
+                        Toast.makeText(getApplicationContext(),"登陆成功",Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
         });
     }
 }
