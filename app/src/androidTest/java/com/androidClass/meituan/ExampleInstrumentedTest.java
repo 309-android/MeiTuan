@@ -1,4 +1,4 @@
-package com.androidclass.meituan;
+package com.androidClass.meituan;
 
 import android.content.Context;
 

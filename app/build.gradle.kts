@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.androidclass.meituan"
+    namespace = "com.androidClass.meituan"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.androidclass.meituan"
+        applicationId = "com.androidClass.meituan"
         minSdk = 28
         targetSdk = 33
         versionCode = 1
