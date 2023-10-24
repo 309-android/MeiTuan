@@ -15,20 +15,24 @@ import android.widget.Toast;
 
 import com.androidClass.meituan.R;
 
-public class UserLoginActivity extends AppCompatActivity {
+public class usePasswordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_login);
+        setContentView(R.layout.activity_use_password);
 
-        // 获取用验证码登录时的手机号
-        EditText userPhoneNumberWithMsg = findViewById(R.id.userPhoneNumberWithMsg);
-        // 获取验证码按钮
-        Button getMsgCode_button = findViewById(R.id.getMsgCode_button);
+        // 用密码登录手机号码输入框
+        EditText userPhoneNumberWithPwd = findViewById(R.id.userPhoneNumberWithPwd);
 
-        // 监听号码输入框
-        userPhoneNumberWithMsg.addTextChangedListener(new TextWatcher() {
+        // 用户密码
+        EditText userPassword = findViewById(R.id.userPassword);
+
+        // 用密码登录的登录按钮
+        Button login_button = findViewById(R.id.login_button);
+
+        // 输入手机号的监听
+        userPhoneNumberWithPwd.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -40,33 +44,37 @@ public class UserLoginActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if(s.length() == 11 && s.toString().startsWith("1")){
-                    // 设置获取验证码按钮颜色
+                    // 设置登录按钮颜色
                     ColorStateList colorStateList = ColorStateList.valueOf(Color.parseColor("#FFC033"));
-                    getMsgCode_button.setEnabled(true);
-                    getMsgCode_button.setBackgroundTintList(colorStateList);
+                    login_button.setEnabled(true);
+                    login_button.setBackgroundTintList(colorStateList);
                 }else if(s.length() > 11 || !s.toString().startsWith("1") ){
                     // 手机号大于11位或者不是以1开头弹出提示
                     Toast.makeText(getApplicationContext(),"请输入正确的手机号码",Toast.LENGTH_LONG).show();
                     // 号码输入错误获取登录按钮变为灰色并禁用按钮
-                    getMsgCode_button.setEnabled(false);
                     ColorStateList colorStateList = ColorStateList.valueOf(Color.parseColor("#CCCCCC"));
-                    getMsgCode_button.setBackgroundTintList(colorStateList);
+                    login_button.setEnabled(false);
+                    login_button.setBackgroundTintList(colorStateList);
                 }
                 else{
-                    // 号码输入错误获取验证码按钮变为灰色并禁用按钮
-                    getMsgCode_button.setEnabled(false);
+                    // 号码输入错误获取登录按钮变为灰色并禁用按钮
                     ColorStateList colorStateList = ColorStateList.valueOf(Color.parseColor("#CCCCCC"));
-                    getMsgCode_button.setBackgroundTintList(colorStateList);
+                    login_button.setEnabled(false);
+                    login_button.setBackgroundTintList(colorStateList);
                 }
             }
         });
 
-        // 用密码登录跳转
-        findViewById(R.id.usePasswordLogin).setOnClickListener(v -> {
-            Intent intent = new Intent(this, usePasswordActivity.class);
+        // 用验证码登录跳转
+        findViewById(R.id.useMsgCodeLogin).setOnClickListener(v->{
+            Intent intent = new Intent(this, UserLoginActivity.class);
             startActivity(intent);
         });
 
-
+        // 登录按钮的逻辑
+        login_button.setOnClickListener(v->{
+            String phoneNumber = userPhoneNumberWithPwd.getText().toString();
+            String password = userPassword.getText().toString();
+        });
     }
 }
