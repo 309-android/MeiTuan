@@ -9,21 +9,19 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.androidClass.meituan.R;
+import com.androidClass.meituan.model.User;
 import com.androidClass.meituan.utils.OKHttpUtils;
+import com.androidClass.meituan.utils.SoftInputUtil;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class usePasswordActivity extends AppCompatActivity {
 
@@ -43,7 +41,7 @@ public class usePasswordActivity extends AppCompatActivity {
         // 用密码登录的登录按钮
         Button login_button = findViewById(R.id.login_button);
 
-        // 输入手机号的监听
+         // 输入手机号的监听
         userPhoneNumberWithPwd.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -56,6 +54,9 @@ public class usePasswordActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if(s.length() == 11 && s.toString().startsWith("1")){
+                    // 关闭软键盘
+                    SoftInputUtil.hideSoftInput(userPhoneNumberWithPwd);
+
                     // 设置登录按钮颜色
                     ColorStateList colorStateList = ColorStateList.valueOf(Color.parseColor("#FFC033"));
                     login_button.setEnabled(true);
@@ -79,9 +80,11 @@ public class usePasswordActivity extends AppCompatActivity {
 
         // 用验证码登录跳转
         findViewById(R.id.useMsgCodeLogin).setOnClickListener(v->{
-            Intent intent = new Intent(this, UserLoginActivity.class);
+            Intent intent = new Intent(this, useMsgCodeActivity.class);
             startActivity(intent);
         });
+
+        login_button.setEnabled(true);
 
         // 登录按钮的逻辑
         login_button.setOnClickListener(v->{
@@ -92,20 +95,19 @@ public class usePasswordActivity extends AppCompatActivity {
             map.put("password",password);
             OKHttpUtils okHttpUtils = new OKHttpUtils();
             okHttpUtils.POST_JSON("/user/login",map);
-//            okHttpUtils.get("/user/test");
             okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
                 @Override
                 public void error(String error) {
-
+//                    Toast.makeText(getApplicationContext(),error,Toast.LENGTH_LONG).show();
+                    Log.d("young",error);
                 }
 
                 @Override
                 public void success(String json) {
                     Gson gson = new Gson();
-                    String msg = gson.fromJson(json, String.class);
-                    if("success".equals(msg)){
-                        Toast.makeText(getApplicationContext(),"登陆成功",Toast.LENGTH_LONG).show();
-                    }
+                    String loginStatus = gson.fromJson(json, String.class);
+                    Log.d("young","loginStatus : " + loginStatus);
+                    Toast.makeText(getApplicationContext(),loginStatus,Toast.LENGTH_LONG).show();
                 }
             });
         });
