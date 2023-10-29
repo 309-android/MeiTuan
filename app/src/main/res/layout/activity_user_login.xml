@@ -14,11 +14,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="欢迎登录美团"
-            android:textStyle="bold"
-            android:textSize="30sp"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="100dp"/>
+            android:layout_marginTop="100dp"
+            android:text="欢迎登录美团"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <!--手机输入框-->
         <LinearLayout
@@ -29,49 +29,49 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dp"
                 android:text="+86"
                 android:textColor="#F5D17A"
-                android:textSize="20sp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="50dp"/>
+                android:textSize="20sp" />
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
                 android:text=">"
                 android:textColor="#CCCCCC"
-                android:textSize="30sp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"/>
+                android:textSize="30sp" />
 
             <EditText
                 android:id="@+id/userPhoneNumberWithMsg"
                 android:layout_width="280dp"
                 android:layout_height="60dp"
-                android:inputType="number"
-                android:hint="  请输入手机号"
-                android:textSize="20sp"
+                android:layout_gravity="center"
                 android:background="@null"
-                android:layout_gravity="center"/>
+                android:hint="  请输入手机号"
+                android:inputType="number"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="320dp"
             android:layout_height="1dp"
-            android:background="@drawable/layout_line"
+            android:layout_gravity="center"
             android:layout_marginLeft="5dp"
-            android:layout_gravity="center"/>
+            android:background="@drawable/layout_line" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="15dp"
             android:text="未注册的手机号验证后自动创建美团账号"
             android:textColor="#959595"
-            android:textSize="16sp"
-            android:layout_gravity="center"
-            android:layout_marginRight="15dp"/>
+            android:textSize="16sp" />
 
         <!--复选框文字说明布局-->
         <LinearLayout
@@ -85,14 +85,14 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_marginLeft="45dp"
-                android:layout_marginTop="3dp"/>
+                android:layout_marginTop="3dp" />
 
             <!--复选框文字说明-->
             <LinearLayout
                 android:layout_width="305dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp">
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -104,19 +104,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="我已阅读并同意"
-                        android:textColor="#959595"/>
+                        android:textColor="#959595" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="《用户协议》、《隐私政策》"
-                        android:textColor="#4F82C2"/>
+                        android:textColor="#4F82C2" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="，"
-                        android:textColor="#959595"/>
+                        android:textColor="#959595" />
 
                 </LinearLayout>
 
@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="并授权美团外卖使用该美团账号信息（如昵称、头像、收货地址）进行统一管理。"
-                    android:textColor="#959595"/>
+                    android:textColor="#959595" />
 
             </LinearLayout>
 
@@ -137,12 +137,13 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/round_corner"
             android:backgroundTint="#CCCCCC"
-            android:text="获取短信验证码"
             android:enabled="false"
-            android:textSize="17sp"
+            android:text="获取短信验证码"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="10dp"/>
+            android:textSize="17sp" />
 
         <!--两个按钮的布局-->
         <LinearLayout
@@ -152,21 +153,23 @@
 
             <Button
                 android:id="@+id/usePasswordLogin"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="密码登录"
-                android:backgroundTint="#FFFBFE"
                 android:layout_marginLeft="40dp"
-                android:textColor="#F5D17A"/>
+                android:backgroundTint="#FFFBFE"
+                android:text="密码登录"
+                android:textColor="#F5D17A" />
 
             <Button
                 android:id="@+id/hasProblem"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="遇到问题"
-                android:backgroundTint="#FFFBFE"
                 android:layout_marginLeft="120dp"
-                android:textColor="#F5D17A"/>
+                android:backgroundTint="#FFFBFE"
+                android:text="遇到问题"
+                android:textColor="#F5D17A" />
 
         </LinearLayout>
 

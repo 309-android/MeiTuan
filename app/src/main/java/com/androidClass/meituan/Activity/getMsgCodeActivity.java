@@ -22,6 +22,9 @@ import org.w3c.dom.Text;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 获取验证码界面的activity
+ */
 public class getMsgCodeActivity extends AppCompatActivity {
 
     @Override
@@ -75,7 +78,10 @@ public class getMsgCodeActivity extends AppCompatActivity {
                             String status = gson.fromJson(json, String.class);
                             Log.d("young","checkCodeStatus : " + status);
                             if("success".equals(status)){
-                                Toast.makeText(getApplicationContext(),"登录成功",Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getApplicationContext(),"登录成功",Toast.LENGTH_LONG).show();
+                                // 登录成功跳转首页
+                                Intent intent = new Intent(getMsgCodeActivity.this, HomePageActivity.class);
+                                startActivity(intent);
                             }else{
                                 Toast.makeText(getApplicationContext(),"您输入的验证码错误，请重试",Toast.LENGTH_LONG).show();
                             }

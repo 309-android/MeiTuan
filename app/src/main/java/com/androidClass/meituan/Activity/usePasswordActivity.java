@@ -22,7 +22,9 @@ import com.google.gson.Gson;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * 用密码登录的activity
+ */
 public class usePasswordActivity extends AppCompatActivity {
 
 
@@ -107,7 +109,11 @@ public class usePasswordActivity extends AppCompatActivity {
                     Gson gson = new Gson();
                     String loginStatus = gson.fromJson(json, String.class);
                     Log.d("young","loginStatus : " + loginStatus);
-                    Toast.makeText(getApplicationContext(),loginStatus,Toast.LENGTH_LONG).show();
+                    if("success".equals(loginStatus)){
+                        // 登录成功跳转首页
+                        Intent intent = new Intent(usePasswordActivity.this, HomePageActivity.class);
+                        startActivity(intent);
+                    }
                 }
             });
         });

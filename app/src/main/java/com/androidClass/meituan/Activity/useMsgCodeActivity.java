@@ -22,6 +22,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * 用验证码登录的activity
+ */
 public class useMsgCodeActivity extends AppCompatActivity {
 
 
