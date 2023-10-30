@@ -472,7 +472,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:grivity="center_vertical"
         android:gravity="center|bottom">
         <ImageButton
             android:layout_width="0dp"

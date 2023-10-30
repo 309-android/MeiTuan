@@ -3,14 +3,12 @@ package com.androidClass.meituan.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.androidClass.meituan.Adapter.FoodAdapter;
+import com.androidClass.meituan.Adapter.StoreAdapter;
 import com.androidClass.meituan.R;
-import com.androidClass.meituan.model.Food;
+import com.androidClass.meituan.model.Store;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +18,7 @@ import java.util.List;
  */
 public class HomePageActivity extends AppCompatActivity {
 
-    private List<Food> foodList = new ArrayList<>();
+    private List<Store> storeList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +46,29 @@ public class HomePageActivity extends AppCompatActivity {
         });
 
         initFoods();
-        FoodAdapter adapter = new FoodAdapter(HomePageActivity.this, R.layout.food_item, foodList);
+        StoreAdapter adapter = new StoreAdapter(HomePageActivity.this, R.layout.food_item, storeList);
         ListView listview =(ListView) findViewById(R.id.foodList_ListView);
         listview.setAdapter(adapter);
 
     }
 
     private void initFoods(){
-        for (int i = 0; i < 10; i++) {
-            Food food = new Food("咖啡","@drawable/test");
-            foodList.add(food);
+
+
+        for (int i = 0; i < 50; i++) {
+            Store store = new Store();
+            store.setStoreName("瑞幸咖啡");
+            store.setImage("test");
+            store.setStoreScore("4.6");
+            store.setMonthSale(1000);
+            store.setDeliveryNum(5);
+            store.setMinTakeOutNum(20);
+            store.setPeopleAvg(15);
+            store.setComment("不好喝");
+
+            storeList.add(store);
         }
+
+
     }
 }

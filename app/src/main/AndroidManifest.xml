@@ -24,9 +24,7 @@
             android:exported="false" />
         <activity
             android:name=".Activity.usePasswordActivity"
-            android:exported="false" /> <!-- <activity -->
-        <!-- android:name=".Activity.UserLoginActivity" -->
-        <!-- android:exported="false" /> -->
+            android:exported="false" />
         <activity
             android:name=".Activity.useMsgCodeActivity"
             android:exported="true">
