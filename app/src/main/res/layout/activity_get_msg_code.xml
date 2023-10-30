@@ -53,6 +53,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:inputType="number"
+        android:maxLength="6"
         android:background="@drawable/layout_line"
         android:layout_gravity="center"/>
 
@@ -72,11 +73,14 @@
             android:layout_marginLeft="55dp"
             android:textColor="#555555"/>
 
-        <TextView
+        <Button
+            android:id="@+id/secondGetCode_Button"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:text="秒后重新获取验证码"
+            android:enabled="false"
             android:layout_marginTop="35dp"
+            style="?android:attr/borderlessButtonStyle"
             android:textColor="#555555"/>
 
     </LinearLayout>

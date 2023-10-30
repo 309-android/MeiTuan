@@ -3,11 +3,13 @@ package com.androidClass.meituan.model;
 
 import java.io.Serializable;
 
-
+/**
+ * 店铺实体类
+ */
 public class Store implements Serializable {
 
     // 店铺id
-    private int id;
+    private Integer id;
     // 店铺名字
     private String storeName;
     // 店铺图片名
@@ -15,19 +17,21 @@ public class Store implements Serializable {
     // 店铺评分
     private String storeScore;
     // 店铺月售
-    private int monthSale;
+    private String monthSale;
     // 店铺人均价格
-    private int peopleAvg;
+    private String peopleAvg;
     // 店铺起送价格
-    private int minTakeOutNum;
+    private String minTakeOutNum;
     // 配送价格
-    private int deliveryNum;
+    private String deliveryNum;
     // 店铺评价
     private String comment;
 
 
     public Store() {
     }
+
+
 
     @Override
     public String toString() {
@@ -36,15 +40,15 @@ public class Store implements Serializable {
                 ", storeName='" + storeName + '\'' +
                 ", Image='" + Image + '\'' +
                 ", storeScore='" + storeScore + '\'' +
-                ", monthSale=" + monthSale +
-                ", peopleAvg=" + peopleAvg +
-                ", minTakeOutNum=" + minTakeOutNum +
-                ", deliveryNum=" + deliveryNum +
+                ", monthSale='" + monthSale + '\'' +
+                ", peopleAvg='" + peopleAvg + '\'' +
+                ", minTakeOutNum='" + minTakeOutNum + '\'' +
+                ", deliveryNum='" + deliveryNum + '\'' +
                 ", comment='" + comment + '\'' +
                 '}';
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -76,35 +80,35 @@ public class Store implements Serializable {
         this.storeScore = storeScore;
     }
 
-    public int getMonthSale() {
+    public String getMonthSale() {
         return monthSale;
     }
 
-    public void setMonthSale(int monthSale) {
+    public void setMonthSale(String monthSale) {
         this.monthSale = monthSale;
     }
 
-    public int getPeopleAvg() {
+    public String getPeopleAvg() {
         return peopleAvg;
     }
 
-    public void setPeopleAvg(int peopleAvg) {
+    public void setPeopleAvg(String peopleAvg) {
         this.peopleAvg = peopleAvg;
     }
 
-    public int getMinTakeOutNum() {
+    public String getMinTakeOutNum() {
         return minTakeOutNum;
     }
 
-    public void setMinTakeOutNum(int minTakeOutNum) {
+    public void setMinTakeOutNum(String minTakeOutNum) {
         this.minTakeOutNum = minTakeOutNum;
     }
 
-    public int getDeliveryNum() {
+    public String getDeliveryNum() {
         return deliveryNum;
     }
 
-    public void setDeliveryNum(int deliveryNum) {
+    public void setDeliveryNum(String deliveryNum) {
         this.deliveryNum = deliveryNum;
     }
 

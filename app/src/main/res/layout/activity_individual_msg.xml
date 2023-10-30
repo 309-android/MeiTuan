@@ -15,120 +15,34 @@
             android:layout_height="50dp"
             android:src="@drawable/p1" />
 
-        <TextView
+        <Button
+            android:id="@+id/toLoginOrRegister_Button"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="261dp"
             android:layout_height="50dp"
+            android:background="#FFFFFF"
             android:gravity="left|center"
-            android:text="登陆/注册"
+            android:text="登录/注册"
             android:textSize="25sp" />
 
         <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="7dp"
             android:adjustViewBounds="true"
+            android:layout_marginLeft="10dp"
             android:src="@drawable/p2" />
 
         <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="36dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="7dp"
             android:adjustViewBounds="true"
             android:src="@drawable/p3" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="165dp"
-        android:layout_marginLeft="10dp"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:text="我的资产" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/p4" />
-
-            <TextView
-                android:layout_width="116dp"
-                android:layout_height="match_parent"
-                android:gravity="left|center"
-                android:text="红包/神券"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/p5" />
-
-            <TextView
-                android:layout_width="105dp"
-                android:layout_height="match_parent"
-                android:gravity="left|center"
-                android:text="代金券"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/p6" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="left|center"
-                android:text="津贴"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/p7" />
-
-            <TextView
-                android:layout_width="116dp"
-                android:layout_height="match_parent"
-                android:gravity="left|center"
-                android:text="米粒"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/p8" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:gravity="left|center"
-                android:layout_height="match_parent"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:text="立减金" />
-        </LinearLayout>
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -143,9 +57,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="收藏"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="收藏" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="335dp"
@@ -154,180 +68,15 @@
                 android:text="暂无"
                 android:textSize="15dp" />
 
-            <ImageView
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/p9" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                android:text="足迹" />
-
-            <TextView
-                android:layout_width="335dp"
-                android:layout_height="wrap_content"
-                android:text="暂无"
-                android:gravity="right"
-                android:textSize="15dp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/p9" />
-        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:text="我的钱包"
-                android:textStyle="bold"
-                android:textSize="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="进入钱包" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/p9" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:text="1个" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:text="未领取" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:text="支付奖励" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:text="1笔" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:text="消费记录" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:text="我的账单" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:text="1笔" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:text="下单有返利" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:text="最低可领" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:text="1家" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:text="银行活动" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:text="无门槛" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -336,28 +85,29 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
             android:text="我的功能"
-            android:textStyle="bold"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageButton
+                    android:id="@+id/addAddress_Button"
+                    android:layout_width="61dp"
+                    android:layout_height="51dp"
                     android:src="@drawable/p10" />
 
                 <TextView
@@ -366,60 +116,48 @@
                     android:text="我的地址" />
             </LinearLayout>
 
+
             <LinearLayout
-                android:layout_width="76dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/p11" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="答谢记录" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
+                <ImageButton
+                    android:id="@+id/myComment_Button"
+                    android:layout_width="55dp"
                     android:layout_height="47dp"
                     android:src="@drawable/p12" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="我的评价" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/myStar_Button"
                     android:layout_width="56dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/p13" />
+                    android:layout_height="43dp"
+                    android:background="@null"
+                    android:src="@drawable/p14" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="发票助手" />
+                    android:layout_marginTop="8dp"
+                    android:text="我的收藏" />
             </LinearLayout>
-
 
         </LinearLayout>
 
@@ -428,70 +166,35 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="97dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/p15" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="集点返券" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="128dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/p16" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="企业用餐" />
-            </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:gravity="center|bottom">
+        android:layout_height="match_parent"
+        android:gravity="center|bottom"
+        android:orientation="horizontal">
+
         <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/b1"/>
+            android:layout_width="53dp"
+            android:layout_height="54dp"
+            android:src="@drawable/b1" />
+
         <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/b2"/>
+            android:layout_width="73dp"
+            android:layout_height="53dp"
+            android:src="@drawable/b2" />
+
         <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/b3"/>
+            android:layout_width="77dp"
+            android:layout_height="51dp"
+            android:src="@drawable/b3" />
+
         <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/b4"/>
+            android:layout_width="82dp"
+            android:layout_height="50dp"
+            android:src="@drawable/b4" />
     </LinearLayout>
+
 </LinearLayout>

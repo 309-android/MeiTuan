@@ -82,8 +82,8 @@
 
             <CheckBox
                 android:id="@+id/MsgCode_check"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginLeft="45dp"
                 android:layout_marginTop="3dp" />
 

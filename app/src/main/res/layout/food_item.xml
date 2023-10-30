@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:text="店铺名字"
+                android:maxLength="12"
                 android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -73,10 +74,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="8dp"
                     android:background="@drawable/grey_stroke"
                     android:text="美团专送"
-                    android:textSize="13sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -101,6 +102,16 @@
                     android:layout_marginLeft="10dp"
                     android:text="配送 约￥X"
                     android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/storeId_TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:enabled="false"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="15sp"/>
+
 
             </LinearLayout>
 
