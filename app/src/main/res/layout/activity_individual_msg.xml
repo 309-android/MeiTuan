@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFFFFF"
     android:orientation="vertical">
 
     <LinearLayout
@@ -170,31 +172,74 @@
 
     </LinearLayout>
 
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:gravity="center|bottom"-->
+<!--        android:orientation="horizontal">-->
+
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_weight="1">-->
+
+<!--            <ImageButton-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:background="#FFFFFF"-->
+<!--                android:src="@drawable/home" />-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_weight="1">-->
+
+<!--            <ImageButton-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:background="#FFFFFF"-->
+<!--                android:src="@drawable/order" />-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:gravity="center"-->
+<!--            android:layout_weight="1">-->
+
+
+<!--            <ImageButton-->
+<!--                android:layout_width="50dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:background="#FFFFFF"-->
+<!--                android:src="@drawable/my" />-->
+
+<!--        </LinearLayout>-->
+
+<!--    </LinearLayout>-->
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center|bottom"
-        android:orientation="horizontal">
+        android:layout_height="345dp"/>
 
-        <ImageButton
-            android:layout_width="53dp"
-            android:layout_height="54dp"
-            android:src="@drawable/b1" />
-
-        <ImageButton
-            android:layout_width="73dp"
-            android:layout_height="53dp"
-            android:src="@drawable/b2" />
-
-        <ImageButton
-            android:layout_width="77dp"
-            android:layout_height="51dp"
-            android:src="@drawable/b3" />
-
-        <ImageButton
-            android:layout_width="82dp"
-            android:layout_height="50dp"
-            android:src="@drawable/b4" />
-    </LinearLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_my"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#FFFFFF"
+        app:menu="@menu/bottom_nav_menu" />
 
 </LinearLayout>

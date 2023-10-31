@@ -99,32 +99,27 @@
     <!--店铺展示布局-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="440dp"
+        android:layout_height="495dp"
         android:background="#F6F4F5"
         android:orientation="vertical">
 
         <ListView
             android:id="@+id/foodList_ListView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
         </ListView>
+
 
     </LinearLayout>
 
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/ViewPager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_bottom"
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="#ffffff"
-        app:menu="@menu/menu"/>
-
+        android:background="#FFFFFF"
+        app:menu="@menu/bottom_nav_menu" />
 
 </LinearLayout>

@@ -44,6 +44,7 @@ public class StoreAdapter extends ArrayAdapter {
         TextView deliveryNum =(TextView) view.findViewById(R.id.deliveryNum_TextView);
         TextView comment =(TextView) view.findViewById(R.id.comment_TextView);
 
+        // 设置值
         storeId.setText(String.format("%d",store.getId()));
         storeImage.setImageResource(getImageResourceId.getImageResourceId(getContext(),store.getImage()));//为图片视图设置图片资源
         storeName.setText(store.getStoreName());//为文本视图设置文本内容
