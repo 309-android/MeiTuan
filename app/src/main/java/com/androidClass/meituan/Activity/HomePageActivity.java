@@ -2,14 +2,13 @@ package com.androidClass.meituan.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,6 +30,8 @@ public class HomePageActivity extends AppCompatActivity {
 
     private List<Store> storeList = new ArrayList<>();
     private BottomNavigationView navigationView;
+    private StoreAdapter storeAdapter;
+    private ListView listview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +90,8 @@ public class HomePageActivity extends AppCompatActivity {
         // 初始化店铺
         initStores();
 
+
+
     }
 
     /**
@@ -112,9 +115,12 @@ public class HomePageActivity extends AppCompatActivity {
                 Log.d("young", "storeList : " + storeList.toString());
 
                 // 初始化listview
-                StoreAdapter adapter = new StoreAdapter(HomePageActivity.this, R.layout.food_item, storeList);
-                ListView listview = (ListView) findViewById(R.id.foodList_ListView);
-                listview.setAdapter(adapter);
+                storeAdapter = new StoreAdapter(HomePageActivity.this, R.layout.store_item, storeList);
+                listview = (ListView) findViewById(R.id.storeList_ListView);
+                listview.setAdapter(storeAdapter);
+
+                // 点击店铺
+                clickStore();
             }
         });
     }
@@ -124,5 +130,18 @@ public class HomePageActivity extends AppCompatActivity {
      */
     private void initBottomMenu() {
         // 初始化
+    }
+
+    /**
+     * 点击店铺逻辑
+     */
+    public void clickStore(){
+        // 设置点击store事件
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),"点了一下 " + storeList.get(position).getId().toString() + storeList.get(position).getStoreName(),Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
