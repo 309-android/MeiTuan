@@ -9,14 +9,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.androidClass.meituan.R;
-import com.androidClass.meituan.model.User;
 import com.androidClass.meituan.utils.OKHttpUtils;
 import com.androidClass.meituan.utils.SoftInputUtil;
 import com.google.gson.Gson;
@@ -27,7 +25,7 @@ import java.util.Map;
 /**
  * 用密码登录的activity
  */
-public class usePasswordActivity extends AppCompatActivity {
+public class UsePasswordActivity extends AppCompatActivity {
 
 
     private EditText userPhoneNumberWithPwd;
@@ -57,7 +55,7 @@ public class usePasswordActivity extends AppCompatActivity {
 
         // 用验证码登录跳转
         findViewById(R.id.useMsgCodeLogin).setOnClickListener(v -> {
-            Intent intent = new Intent(this, useMsgCodeActivity.class);
+            Intent intent = new Intent(this, UseMsgCodeActivity.class);
             startActivity(intent);
         });
     }
@@ -126,7 +124,7 @@ public class usePasswordActivity extends AppCompatActivity {
                     Log.d("young", "loginStatus : " + loginStatus);
                     if ("success".equals(loginStatus)) {
                         // 登录成功跳转首页
-                        Intent intent = new Intent(usePasswordActivity.this, HomePageActivity.class);
+                        Intent intent = new Intent(UsePasswordActivity.this, HomePageActivity.class);
                         startActivity(intent);
                     } else if ("error".equals(loginStatus)) {
                         Toast.makeText(getApplicationContext(), "账号或者密码输入错误！请重试", Toast.LENGTH_LONG).show();

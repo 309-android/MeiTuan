@@ -8,7 +8,6 @@ import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,15 +18,13 @@ import com.androidClass.meituan.utils.OKHttpUtils;
 import com.androidClass.meituan.utils.SoftInputUtil;
 import com.google.gson.Gson;
 
-import org.w3c.dom.Text;
-
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * 获取验证码界面的activity
  */
-public class getMsgCodeActivity extends AppCompatActivity {
+public class GetMsgCodeActivity extends AppCompatActivity {
 
     private EditText inputCode;
     private TextView getMsgCodePhoneNumber;
@@ -127,7 +124,7 @@ public class getMsgCodeActivity extends AppCompatActivity {
                             if ("success".equals(status)) {
                                 //Toast.makeText(getApplicationContext(),"登录成功",Toast.LENGTH_LONG).show();
                                 // 登录成功跳转首页
-                                Intent intent = new Intent(getMsgCodeActivity.this, HomePageActivity.class);
+                                Intent intent = new Intent(GetMsgCodeActivity.this, HomePageActivity.class);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(getApplicationContext(), "您输入的验证码错误，请重试", Toast.LENGTH_LONG).show();

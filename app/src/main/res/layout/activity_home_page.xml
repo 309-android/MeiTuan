@@ -29,7 +29,7 @@
             android:layout_height="45dp"
             android:layout_gravity="center"
             android:backgroundTint="#FFE026"
-            android:text="地址地址地址"
+            android:text="添加地址"
             android:textColor="#000000"
             android:textSize="17sp"
             android:textStyle="bold" />
@@ -66,40 +66,77 @@
         android:layout_width="match_parent"
         android:layout_height="75dp">
 
-        <ImageButton
-            android:id="@+id/FineFood_Button"
-            android:layout_width="90dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/fine_food" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-        <ImageButton
-            android:id="@+id/Drink_Button"
-            android:layout_width="90dp"
-            android:layout_height="70dp"
-            android:background="@drawable/drink" />
+            <ImageButton
+                android:id="@+id/FineFood_Button"
+                android:layout_width="90dp"
+                android:layout_height="75dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center"
+                android:background="@drawable/fine_food" />
 
-        <ImageButton
-            android:id="@+id/Market_Button"
-            android:layout_width="90dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="3dp"
-            android:background="@drawable/supermarket" />
+        </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/Fruit_Button"
-            android:layout_width="90dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="1dp"
-            android:background="@drawable/fruit" />
 
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/Drink_Button"
+                android:layout_width="90dp"
+                android:layout_height="75dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center"
+                android:background="@drawable/drink" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/Market_Button"
+                android:layout_width="90dp"
+                android:layout_height="75dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center"
+                android:background="@drawable/supermarket" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:id="@+id/Fruit_Button"
+                android:layout_width="90dp"
+                android:layout_height="75dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="1dp"
+                android:layout_gravity="center"
+                android:background="@drawable/fruit" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
     <!--店铺展示布局-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="495dp"
+        android:layout_height="368dp"
         android:background="#F6F4F5"
         android:orientation="vertical">
 
@@ -114,11 +151,99 @@
     </LinearLayout>
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#FFFFFF"
-        app:menu="@menu/bottom_nav_menu" />
+        <!--底部导航栏-->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation_home"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#FFFFFF"
+            app:menu="@menu/bottom_nav_menu" />
+
+    <!--底部按钮-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:background="@drawable/layout_line"-->
+<!--        android:orientation="horizontal">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <ImageButton-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="35dp"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:background="#FFFFFF"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:src="@drawable/home"/>-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:text="首页"-->
+<!--                android:textColor="#000000"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_gravity="center"/>-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <ImageButton-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="35dp"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:background="#FFFFFF"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:src="@drawable/order"/>-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:text="订单"-->
+<!--                android:textColor="#000000"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_gravity="center"/>-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <ImageButton-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="35dp"-->
+<!--                android:adjustViewBounds="true"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:background="#FFFFFF"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:src="@drawable/my"/>-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:text="我的"-->
+<!--                android:textColor="#000000"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_gravity="center"/>-->
+
+<!--        </LinearLayout>-->
+
+<!--    </LinearLayout>-->
 
 </LinearLayout>

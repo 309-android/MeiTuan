@@ -17,19 +17,22 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.OrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.IndividualMsgActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.UseMsgCodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.GetMsgCodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.UsePasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.HomePageActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.getMsgCodeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.usePasswordActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.useMsgCodeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,12 +1,10 @@
 package com.androidClass.meituan.Activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -28,9 +26,13 @@ import java.util.List;
  */
 public class HomePageActivity extends AppCompatActivity {
 
+    // 店铺集合
     private List<Store> storeList = new ArrayList<>();
+    // 底部导航栏
     private BottomNavigationView navigationView;
+    // 店铺适配器
     private StoreAdapter storeAdapter;
+    // 店铺ListView
     private ListView listview;
 
     @Override
@@ -38,34 +40,8 @@ public class HomePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        navigationView = findViewById(R.id.bottom_navigation);
-
-        navigationView.setOnNavigationItemSelectedListener(item -> {
-            if(item.getItemId() == R.id.item_home){
-                // 跳转到HomeActivity
-                Intent homeIntent = new Intent(HomePageActivity.this, HomePageActivity.class);
-                startActivity(homeIntent);
-                return true;
-            }else if(item.getItemId() == R.id.item_order){
-                // 跳转到usePasswordActivity
-                Intent profileIntent = new Intent(HomePageActivity.this, usePasswordActivity.class);
-                startActivity(profileIntent);
-                return true;
-            }else if(item.getItemId() == R.id.item_user){
-                // 跳转到IndividualMsgActivity
-                Intent settingsIntent = new Intent(HomePageActivity.this, IndividualMsgActivity.class);
-                startActivity(settingsIntent);
-                return true;
-            }
-            return false;
-        });
-
-        navigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-
-            }
-        });
+        // 初始化底部导航栏
+        initBottomNavigation();
 
         // 美食按钮监听
         findViewById(R.id.FineFood_Button).setOnClickListener(v -> {
@@ -90,8 +66,35 @@ public class HomePageActivity extends AppCompatActivity {
         // 初始化店铺
         initStores();
 
+    }
 
-
+    /**
+     * 初始化底部导航栏
+     */
+    private void initBottomNavigation() {
+        // 底部导航栏初始化
+        navigationView = findViewById(R.id.bottom_navigation_home);
+        // 设置默认选中首页
+        navigationView.setSelectedItemId(R.id.item_home);
+        navigationView.setOnNavigationItemSelectedListener(item -> {
+            if(item.getItemId() == R.id.item_home){
+                // 跳转到HomeActivity
+//                Intent homeIntent = new Intent(HomePageActivity.this, HomePageActivity.class);
+//                startActivity(homeIntent);
+                return true;
+            }else if(item.getItemId() == R.id.item_order){
+                // 跳转到OrderActivity
+                Intent orderIntent = new Intent(HomePageActivity.this, OrderActivity.class);
+                startActivity(orderIntent);
+                return true;
+            }else if(item.getItemId() == R.id.item_user){
+                // 跳转到IndividualMsgActivity
+                Intent mineIntent = new Intent(HomePageActivity.this, IndividualMsgActivity.class);
+                startActivity(mineIntent);
+                return true;
+            }
+            return false;
+        });
     }
 
     /**
@@ -126,13 +129,6 @@ public class HomePageActivity extends AppCompatActivity {
     }
 
     /**
-     * 初始化底部按钮
-     */
-    private void initBottomMenu() {
-        // 初始化
-    }
-
-    /**
      * 点击店铺逻辑
      */
     public void clickStore(){
@@ -140,7 +136,9 @@ public class HomePageActivity extends AppCompatActivity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),"点了一下 " + storeList.get(position).getId().toString() + storeList.get(position).getStoreName(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"点了一下 "
+                        + storeList.get(position).getId().toString()
+                        + storeList.get(position).getStoreName(),Toast.LENGTH_LONG).show();
             }
         });
     }

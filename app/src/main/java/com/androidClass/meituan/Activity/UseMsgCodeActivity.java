@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -22,12 +21,11 @@ import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * 用验证码登录的activity
  */
-public class useMsgCodeActivity extends AppCompatActivity {
+public class UseMsgCodeActivity extends AppCompatActivity {
 
 
     private CheckBox msgCode_check;
@@ -38,7 +36,7 @@ public class useMsgCodeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_login);
+        setContentView(R.layout.activity_use_msg_code);
 
         // 获取checkBox
         msgCode_check = findViewById(R.id.MsgCode_check);
@@ -56,7 +54,7 @@ public class useMsgCodeActivity extends AppCompatActivity {
 
         // 用密码登录跳转
         findViewById(R.id.usePasswordLogin).setOnClickListener(v -> {
-            Intent intent = new Intent(this, usePasswordActivity.class);
+            Intent intent = new Intent(this, UsePasswordActivity.class);
             startActivity(intent);
         });
 
@@ -71,7 +69,7 @@ public class useMsgCodeActivity extends AppCompatActivity {
     private void getCodeImpl() {
         // 获取验证码跳转
         getMsgCode_button.setOnClickListener(v -> {
-            Intent intent = new Intent(this, getMsgCodeActivity.class);
+            Intent intent = new Intent(this, GetMsgCodeActivity.class);
             Bundle bundle = new Bundle();
             bundle.putString("phoneNumber", userPhoneNumberWithMsg.getText().toString());
 
