@@ -17,6 +17,7 @@ import com.androidClass.meituan.model.Food;
 import com.androidClass.meituan.model.Order;
 import com.androidClass.meituan.model.Store;
 import com.androidClass.meituan.utils.OKHttpUtils;
+import com.androidClass.meituan.utils.SPUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.HashMap;
@@ -89,12 +90,13 @@ public class OrderActivity extends AppCompatActivity {
     private void initOrders(){
         OKHttpUtils okHttpUtils = new OKHttpUtils();
         Bundle bundle = getIntent().getExtras();
-        // 查看是否有其他activity送过来的bundle
-        if(bundle == null){
+        // 查看是否已保存用户数据
+        if(!SPUtils.contains(getApplicationContext(),"phoneNumber")){
+            // 如果为保存用户数据
             Toast.makeText(getApplicationContext(),"您当前还没登录呢，请登录后查看订单",Toast.LENGTH_LONG).show();
-        } else if (bundle != null && bundle.get("phoneNumber") != null) {
-            // 其他页面送来的手机号
-            String phoneNumber =(String) bundle.get("phoneNumber");
+        } else{
+            // 登录时保存的手机号
+            String phoneNumber = (String) SPUtils.get(getApplicationContext(),"phoneNumber","");
             // 放入map用作后端接受的参数
             Map<String,Object> map = new HashMap<>();
             map.put("phoneNumber",phoneNumber);
@@ -115,8 +117,6 @@ public class OrderActivity extends AppCompatActivity {
                     initStoreInOrders();
                 }
             });
-        } else{
-            Toast.makeText(getApplicationContext(),"您当前还没登录呢，请登录后查看订单",Toast.LENGTH_LONG).show();
         }
     }
 

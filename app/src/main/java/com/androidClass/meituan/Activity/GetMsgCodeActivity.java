@@ -3,6 +3,7 @@ package com.androidClass.meituan.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.androidClass.meituan.R;
 import com.androidClass.meituan.utils.OKHttpUtils;
+import com.androidClass.meituan.utils.SPUtils;
 import com.androidClass.meituan.utils.SoftInputUtil;
 import com.google.gson.Gson;
 
@@ -26,10 +28,15 @@ import java.util.Map;
  */
 public class GetMsgCodeActivity extends AppCompatActivity {
 
+    // 验证码输入框
     private EditText inputCode;
+    // 获取验证码显示的手机号
     private TextView getMsgCodePhoneNumber;
+    // 倒计时
     private TextView seconds_TextView;
+    // 手机号
     private String phoneNumber;
+    // 再次获取验证码按钮
     private Button secondGetCode_button;
 
     @Override
@@ -40,7 +47,7 @@ public class GetMsgCodeActivity extends AppCompatActivity {
         // 输入验证码editText
         inputCode = findViewById(R.id.inputCode_EditText);
 
-        secondGetCode_button = findViewById(R.id.secondGetCode_Button);
+        secondGetCode_button = findViewById(R.id.secondGetCode);
 
         // 倒计时
         seconds_TextView = findViewById(R.id.seconds_TextView);
@@ -90,14 +97,11 @@ public class GetMsgCodeActivity extends AppCompatActivity {
         inputCode.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
-
             @Override
             public void afterTextChanged(Editable s) {
                 OKHttpUtils okHttpUtils = new OKHttpUtils();
@@ -129,6 +133,8 @@ public class GetMsgCodeActivity extends AppCompatActivity {
                                 // 把手机号带到首页
                                 bundle.putString("phoneNumber",phoneNumber);
                                 intent.putExtras(bundle);
+                                // 存入文件中 记录登录状态  如果登录就有这个数据 退出时移除
+                                SPUtils.put(getApplicationContext(),"phoneNumber",phoneNumber);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(getApplicationContext(), "您输入的验证码错误，请重试", Toast.LENGTH_LONG).show();

@@ -68,7 +68,7 @@ public class OrderAdapter extends ArrayAdapter {
             // 店铺名
             orderStoreName.setText(orderDO.getStore().getStoreName());
             // 订单状态
-            orderStatus.setText(orderDO.getStatus().equals("1") ? "已完成":"未完成");
+            orderStatus.setText(orderDO.getStatus().equals("0") ? "已完成":"未完成");
             // 食物图片1
             orderFoodImageOne.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO.getFood().getFoodImg()));
             // 食物名字1
@@ -85,7 +85,7 @@ public class OrderAdapter extends ArrayAdapter {
             // 店铺名
             orderStoreName.setText(orderDO1.getStore().getStoreName());
             // 订单状态
-            orderStatus.setText(orderDO1.getStatus().equals("1") ? "已完成":"未完成");
+            orderStatus.setText(orderDO1.getStatus().equals("0") ? "已完成":"未完成");
             // 食物图片1
             orderFoodImageOne.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO1.getFood().getFoodImg()));
             // 食物名字1
@@ -108,7 +108,7 @@ public class OrderAdapter extends ArrayAdapter {
             // 店铺名
             orderStoreName.setText(orderDO1.getStore().getStoreName());
             // 订单状态
-            orderStatus.setText(orderDO1.getStatus().equals("1") ? "已完成":"未完成");
+            orderStatus.setText(orderDO1.getStatus().equals("0") ? "已完成":"未完成");
             // 食物图片1
             orderFoodImageOne.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO1.getFood().getFoodImg()));
             // 食物名字1

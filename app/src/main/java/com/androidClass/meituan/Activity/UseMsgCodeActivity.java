@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.androidClass.meituan.R;
 import com.androidClass.meituan.utils.OKHttpUtils;
+import com.androidClass.meituan.utils.SPUtils;
 import com.androidClass.meituan.utils.SoftInputUtil;
 import com.google.gson.Gson;
 
@@ -48,6 +49,17 @@ public class UseMsgCodeActivity extends AppCompatActivity {
         getMsgCode_button = findViewById(R.id.getMsgCode_button);
         // 验证码
         code = new String();
+
+        // 判断是否已经登录
+        if (SPUtils.contains(getApplicationContext(),"phoneNumber")){
+            // 已登录则将手机号存入bundle并直接放行
+            String phoneNumber =(String) SPUtils.get(getApplicationContext(), "phoneNumber", "");
+            Intent intent = new Intent(this, HomePageActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("phoneNumber",phoneNumber);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
 
         // 输入手机号监听
         phoneNumberListener();

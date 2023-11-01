@@ -4,11 +4,13 @@ package com.androidClass.meituan.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.androidClass.meituan.R;
+import com.androidClass.meituan.utils.SPUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
@@ -20,24 +22,49 @@ public class IndividualMsgActivity extends AppCompatActivity {
     // 登录/注册按钮
     private Button toLoginOrRegisterButton;
 
+
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_msg);
 
-        initBottomNavigation();
-
         // 登录/注册按钮
         toLoginOrRegisterButton = findViewById(R.id.toLoginOrRegister_Button);
 
-        // 登录/注册跳转
-        toLoginOrRegisterButton.setOnClickListener(v -> {
+        // 初始化底部导航栏
+        initBottomNavigation();
 
-            // 跳转到用验证码登录
-            startActivity(new Intent(IndividualMsgActivity.this, UseMsgCodeActivity.class));
-        });
+        checkLogin();
+
     }
 
+    /**
+     * 判断是否登录
+     */
+    private void checkLogin() {
+        // 判断是否登录
+        if (SPUtils.contains(getApplicationContext(),"phoneNumber")){
+            //如果已经登录
+            String phoneNumber = (String) SPUtils.get(getApplicationContext(), "phoneNumber", "");
+            toLoginOrRegisterButton.setText(phoneNumber);
+            toLoginOrRegisterButton.setOnClickListener(v -> {
+                // 已登录则跳转到设置界面
+                startActivity(new Intent(IndividualMsgActivity.this, ExitLoginActivity.class));
+            });
+        }else{
+            // 未登录状态
+            toLoginOrRegisterButton.setText("登录/注册");
+            // 登录/注册跳转
+            toLoginOrRegisterButton.setOnClickListener(v -> {
+                // 跳转到用验证码登录
+                startActivity(new Intent(IndividualMsgActivity.this, UseMsgCodeActivity.class));
+            });
+        }
+    }
+
+    /**
+     * 初始化底部导航栏
+     */
     private void initBottomNavigation() {
         // 底部导航栏初始化
         navigationView = findViewById(R.id.bottom_navigation_my);

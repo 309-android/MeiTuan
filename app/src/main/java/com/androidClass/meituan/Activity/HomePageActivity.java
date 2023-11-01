@@ -16,6 +16,7 @@ import com.androidClass.meituan.Adapter.StoreAdapter;
 import com.androidClass.meituan.R;
 import com.androidClass.meituan.model.Store;
 import com.androidClass.meituan.utils.OKHttpUtils;
+import com.androidClass.meituan.utils.SPUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -85,10 +86,6 @@ public class HomePageActivity extends AppCompatActivity {
             }else if(item.getItemId() == R.id.item_order){
                 // 跳转到OrderActivity
                 Intent orderIntent = new Intent(HomePageActivity.this, OrderActivity.class);
-                Bundle bundle = getIntent().getExtras();
-                if  (bundle != null && bundle.get("phoneNumber") != null){
-                    orderIntent.putExtras(bundle);
-                }
                 startActivity(orderIntent);
                 return true;
             }else if(item.getItemId() == R.id.item_user){

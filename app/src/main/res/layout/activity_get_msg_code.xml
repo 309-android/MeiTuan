@@ -74,7 +74,7 @@
             android:textColor="#555555"/>
 
         <Button
-            android:id="@+id/secondGetCode_Button"
+            android:id="@+id/secondGetCode"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:text="秒后重新获取验证码"
