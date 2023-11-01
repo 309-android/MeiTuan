@@ -92,6 +92,7 @@ public class UseMsgCodeActivity extends AppCompatActivity {
                     if ("success".equals(status)) {
                         // 成功获取验证码跳转
                         intent.putExtras(bundle);
+                        // 携带手机号带到获取验证码页面
                         startActivity(intent);
                     } else {
                         Toast.makeText(getApplicationContext(), "服务器出错啦，请稍后再试", Toast.LENGTH_LONG).show();

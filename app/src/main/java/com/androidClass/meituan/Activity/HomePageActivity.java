@@ -85,6 +85,10 @@ public class HomePageActivity extends AppCompatActivity {
             }else if(item.getItemId() == R.id.item_order){
                 // 跳转到OrderActivity
                 Intent orderIntent = new Intent(HomePageActivity.this, OrderActivity.class);
+                Bundle bundle = getIntent().getExtras();
+                if  (bundle != null && bundle.get("phoneNumber") != null){
+                    orderIntent.putExtras(bundle);
+                }
                 startActivity(orderIntent);
                 return true;
             }else if(item.getItemId() == R.id.item_user){

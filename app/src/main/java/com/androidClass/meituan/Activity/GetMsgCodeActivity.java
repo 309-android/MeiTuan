@@ -113,7 +113,7 @@ public class GetMsgCodeActivity extends AppCompatActivity {
                     okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
                         @Override
                         public void error(String error) {
-
+                            Toast.makeText(getApplicationContext(), "服务器出错啦，请重试", Toast.LENGTH_LONG).show();
                         }
 
                         @Override
@@ -125,6 +125,10 @@ public class GetMsgCodeActivity extends AppCompatActivity {
                                 //Toast.makeText(getApplicationContext(),"登录成功",Toast.LENGTH_LONG).show();
                                 // 登录成功跳转首页
                                 Intent intent = new Intent(GetMsgCodeActivity.this, HomePageActivity.class);
+                                Bundle bundle = new Bundle();
+                                // 把手机号带到首页
+                                bundle.putString("phoneNumber",phoneNumber);
+                                intent.putExtras(bundle);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(getApplicationContext(), "您输入的验证码错误，请重试", Toast.LENGTH_LONG).show();

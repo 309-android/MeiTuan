@@ -29,13 +29,14 @@
         android:gravity="center|start"
         android:orientation="horizontal">
 
+
         <Button
             android:id="@+id/getAllOrders_Button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:backgroundTint="#FFFFFF"
+            android:background="@drawable/order_button_selector"
             android:text="全部订单"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -46,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:backgroundTint="#FFFFFF"
+            android:background="@drawable/order_button_selector"
             android:text="待评价"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -57,7 +58,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="432dp"
-        android:background="#F6F4F5"
+        android:background="#F5F5F5"
         android:orientation="vertical">
 
         <ListView
@@ -66,7 +67,6 @@
             android:layout_height="wrap_content">
 
         </ListView>
-
 
     </LinearLayout>
 

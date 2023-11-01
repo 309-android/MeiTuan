@@ -4,20 +4,53 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
+import com.androidClass.meituan.Adapter.OrderAdapter;
 import com.androidClass.meituan.R;
+import com.androidClass.meituan.model.Food;
+import com.androidClass.meituan.model.Order;
+import com.androidClass.meituan.model.Store;
+import com.androidClass.meituan.utils.OKHttpUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class OrderActivity extends AppCompatActivity {
     // 底部导航栏
     private BottomNavigationView navigationView;
+    // 全部订单按钮
+    private Button getAllOrdersButton;
+    // 待评价按钮
+    private Button getNoCommentsOrdersButton;
+    // 订单数据
+    private List<List<Order>> orders;
+
+    private OrderAdapter orderAdapter;
+    private ListView orderList_listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+
         // 初始化底部导航栏
         initBottomNavigation();
+
+        getAllOrdersButton = findViewById(R.id.getAllOrders_Button);
+
+        getNoCommentsOrdersButton = findViewById(R.id.getNoCommentsOrders_Button);
+
+        // 初始化订单数据
+        initOrders();
+
     }
 
     /**
@@ -47,6 +80,111 @@ public class OrderActivity extends AppCompatActivity {
                 return true;
             }
             return false;
+        });
+    }
+
+    /**
+     * 初始化订单数据
+     */
+    private void initOrders(){
+        OKHttpUtils okHttpUtils = new OKHttpUtils();
+        Bundle bundle = getIntent().getExtras();
+        // 查看是否有其他activity送过来的bundle
+        if(bundle == null){
+            Toast.makeText(getApplicationContext(),"您当前还没登录呢，请登录后查看订单",Toast.LENGTH_LONG).show();
+        } else if (bundle != null && bundle.get("phoneNumber") != null) {
+            // 其他页面送来的手机号
+            String phoneNumber =(String) bundle.get("phoneNumber");
+            // 放入map用作后端接受的参数
+            Map<String,Object> map = new HashMap<>();
+            map.put("phoneNumber",phoneNumber);
+            okHttpUtils.post("/order/getAllOrders",map);
+            okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
+                @Override
+                public void error(String error) {
+
+                }
+
+                @Override
+                public void success(String json) {
+                    orders = JSON.parseObject(json, new TypeReference<List<List<Order>>>() {
+                    });
+                    Log.d("young","json data : " + json);
+                    // 为order中的food字段 手动赋值
+                    initFoodInOrders();
+                    initStoreInOrders();
+                }
+            });
+        } else{
+            Toast.makeText(getApplicationContext(),"您当前还没登录呢，请登录后查看订单",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    /**
+     * 为orders集合中的food 赋值
+     */
+    private void initFoodInOrders(){
+        // 初始化订单中的食物
+        OKHttpUtils okHttpUtils = new OKHttpUtils();
+        okHttpUtils.post("/food/getAllFood",null);
+        okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
+            @Override
+            public void error(String error) {
+                Toast.makeText(getApplicationContext(),"服务器出错啦，请稍后再试",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void success(String json) {
+                List<Food> foodDOS = JSON.parseObject(json, new TypeReference<List<Food>>() {
+                });
+                // 对orders进行处理
+                for (List<Order> order : orders) {
+                    for (Order orderDO : order) {
+                        for (Food foodDO : foodDOS) {
+                            if(foodDO.getId() == orderDO.getFoodId()){
+                                orderDO.setFood(foodDO);
+                            }
+                        }
+                    }
+                }
+
+
+            }
+        });
+    }
+
+    private void initStoreInOrders() {
+        // 初始化订单中的店铺
+        OKHttpUtils okHttpUtils = new OKHttpUtils();
+        okHttpUtils.get("/store/getAll");
+        okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
+            @Override
+            public void error(String error) {
+
+            }
+
+            @Override
+            public void success(String json) {
+                List<Store> stores = JSON.parseObject(json, new TypeReference<List<Store>>() {
+                });
+
+                // 对orders进行处理
+                for (List<Order> order : orders) {
+                    for (Order orderDO : order) {
+                        for (Store store : stores) {
+                            if (orderDO.getStoreId() == store.getId()){
+                                orderDO.setStore(store);
+                            }
+                        }
+                    }
+                }
+                Log.d("young","orders data : " + orders.toString());
+
+                // 初始化listview
+                orderAdapter = new OrderAdapter(OrderActivity.this, R.layout.order_item, orders);
+                orderList_listView = (ListView) findViewById(R.id.orderList_ListView);
+                orderList_listView.setAdapter(orderAdapter);
+            }
         });
     }
 }

@@ -125,6 +125,10 @@ public class UsePasswordActivity extends AppCompatActivity {
                     if ("success".equals(loginStatus)) {
                         // 登录成功跳转首页
                         Intent intent = new Intent(UsePasswordActivity.this, HomePageActivity.class);
+                        Bundle bundle = new Bundle();
+                        // 携带手机号数据到首页
+                        bundle.putString("phoneNumber",phoneNumber);
+                        intent.putExtras(bundle);
                         startActivity(intent);
                     } else if ("error".equals(loginStatus)) {
                         Toast.makeText(getApplicationContext(), "账号或者密码输入错误！请重试", Toast.LENGTH_LONG).show();
