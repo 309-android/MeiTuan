@@ -68,7 +68,7 @@ public class AddAddressActivity extends AppCompatActivity {
 
         // 返回到首页
         backToHomePage_Button.setOnClickListener(v -> {
-            startActivity(new Intent(this, HomePageActivity.class));
+            startActivity(new Intent(this, MyAddressActivity.class));
         });
 
         // 获得选择的标签和性别

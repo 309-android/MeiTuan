@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +22,7 @@ public class IndividualMsgActivity extends AppCompatActivity {
     private BottomNavigationView navigationView;
     // 登录/注册按钮
     private Button toLoginOrRegisterButton;
+    private ImageButton toMyAddressButton;
 
 
     @Override
@@ -30,6 +32,13 @@ public class IndividualMsgActivity extends AppCompatActivity {
 
         // 登录/注册按钮
         toLoginOrRegisterButton = findViewById(R.id.toLoginOrRegister_Button);
+
+        toMyAddressButton = findViewById(R.id.toMyAddress_Button);
+
+        // 我的地址跳转
+        toMyAddressButton.setOnClickListener(v ->{
+            startActivity(new Intent(this, MyAddressActivity.class));
+        });
 
         // 初始化底部导航栏
         initBottomNavigation();

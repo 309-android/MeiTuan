@@ -161,7 +161,7 @@ public class HomePageActivity extends AppCompatActivity {
 
         toAddAddressButton.setOnClickListener(v -> {
             if (SPUtils.contains(getApplicationContext(),"phoneNumber")) {
-                startActivity(new Intent(this, AddAddressActivity.class));
+                startActivity(new Intent(this, MyAddressActivity.class));
             } else {
                 Toast.makeText(getApplicationContext(), "您还没有登录呢，请登录后查看地址", Toast.LENGTH_LONG).show();
             }

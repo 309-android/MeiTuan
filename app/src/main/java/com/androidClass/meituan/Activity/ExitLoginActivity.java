@@ -1,12 +1,13 @@
 package com.androidClass.meituan.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.androidClass.meituan.R;
 import com.androidClass.meituan.utils.SPUtils;
@@ -88,10 +89,26 @@ public class ExitLoginActivity extends AppCompatActivity {
     private void exitLogin(){
         // 退出登录逻辑
         exitLoginButton.setOnClickListener(v -> {
-            // 移除手机号信息
-            SPUtils.remove(getApplicationContext(),"phoneNumber");
-            // 返回登录界面
-            startActivity(new Intent(this, UseMsgCodeActivity.class));
+            //创建提醒对话框的构建器
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("确定退出？");
+            builder.setMessage("退出登录后将无法查看订单，重新登录即可查看");
+            //设置肯定按钮
+            builder.setPositiveButton("确定", (dialog, which) -> {
+                // 移除手机号信息
+                SPUtils.remove(getApplicationContext(),"phoneNumber");
+                // 返回登录界面
+                startActivity(new Intent(this, UseMsgCodeActivity.class));
+            });
+            //设置否定按钮
+            builder.setNegativeButton("取消",(dialog, which)->{
+
+            });
+
+            //根据构建器构建对话框对象
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
         });
     }
 

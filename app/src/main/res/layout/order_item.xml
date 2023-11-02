@@ -170,7 +170,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="30dp"
                     android:text="￥XX.XX"
                     android:textColor="#000000"
                     android:textSize="18sp" />
@@ -182,6 +182,14 @@
                     android:text="共 X 件"
                     android:textSize="17sp"
                     android:layout_gravity="center"/>
+
+                <Button
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:text="去评价"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:background="@drawable/round_corner"/>
 
             </LinearLayout>
 
