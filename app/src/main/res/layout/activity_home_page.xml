@@ -23,7 +23,7 @@
             android:background="@drawable/location_logo" />
 
         <Button
-            android:id="@+id/showAddress_Button"
+            android:id="@+id/toAddAddress_Button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="45dp"

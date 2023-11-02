@@ -2,11 +2,13 @@ package com.androidClass.meituan.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -35,6 +37,8 @@ public class HomePageActivity extends AppCompatActivity {
     private StoreAdapter storeAdapter;
     // 店铺ListView
     private ListView listview;
+    // 添加地址按钮
+    private Button toAddAddressButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,9 @@ public class HomePageActivity extends AppCompatActivity {
 
         // 初始化底部导航栏
         initBottomNavigation();
+
+        // 添加地址按钮
+        toAddAddressButton = findViewById(R.id.toAddAddress_Button);
 
         // 美食按钮监听
         findViewById(R.id.FineFood_Button).setOnClickListener(v -> {
@@ -66,6 +73,8 @@ public class HomePageActivity extends AppCompatActivity {
 
         // 初始化店铺
         initStores();
+        // 添加地址按钮监听
+        toAddAddress();
 
     }
 
@@ -78,17 +87,17 @@ public class HomePageActivity extends AppCompatActivity {
         // 设置默认选中首页
         navigationView.setSelectedItemId(R.id.item_home);
         navigationView.setOnNavigationItemSelectedListener(item -> {
-            if(item.getItemId() == R.id.item_home){
+            if (item.getItemId() == R.id.item_home) {
                 // 跳转到HomeActivity
 //                Intent homeIntent = new Intent(HomePageActivity.this, HomePageActivity.class);
 //                startActivity(homeIntent);
                 return true;
-            }else if(item.getItemId() == R.id.item_order){
+            } else if (item.getItemId() == R.id.item_order) {
                 // 跳转到OrderActivity
                 Intent orderIntent = new Intent(HomePageActivity.this, OrderActivity.class);
                 startActivity(orderIntent);
                 return true;
-            }else if(item.getItemId() == R.id.item_user){
+            } else if (item.getItemId() == R.id.item_user) {
                 // 跳转到IndividualMsgActivity
                 Intent mineIntent = new Intent(HomePageActivity.this, IndividualMsgActivity.class);
                 startActivity(mineIntent);
@@ -108,8 +117,9 @@ public class HomePageActivity extends AppCompatActivity {
         okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
             @Override
             public void error(String error) {
-                Toast.makeText(getApplicationContext(),"服务器出错啦，请稍后再试",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "服务器出错啦，请稍后再试", Toast.LENGTH_LONG).show();
             }
+
             @Override
             public void success(String json) {
                 // json数组转list对象数组
@@ -132,14 +142,28 @@ public class HomePageActivity extends AppCompatActivity {
     /**
      * 点击店铺逻辑
      */
-    public void clickStore(){
+    public void clickStore() {
         // 设置点击store事件
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),"点了一下 "
+                Toast.makeText(getApplicationContext(), "点了一下 "
                         + storeList.get(position).getId().toString()
-                        + storeList.get(position).getStoreName(),Toast.LENGTH_LONG).show();
+                        + storeList.get(position).getStoreName(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    /**
+     * 添加地址按钮监听
+     */
+    private void toAddAddress() {
+
+        toAddAddressButton.setOnClickListener(v -> {
+            if (SPUtils.contains(getApplicationContext(),"phoneNumber")) {
+                startActivity(new Intent(this, AddAddressActivity.class));
+            } else {
+                Toast.makeText(getApplicationContext(), "您还没有登录呢，请登录后查看地址", Toast.LENGTH_LONG).show();
             }
         });
     }

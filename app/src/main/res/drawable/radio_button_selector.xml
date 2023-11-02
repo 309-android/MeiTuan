@@ -1,0 +1,4 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true" android:color="#FFE026" /> <!-- 选中时的颜色 -->
+    <item android:state_checked="false"  /> <!-- 未选中时的颜色 -->
+</selector>

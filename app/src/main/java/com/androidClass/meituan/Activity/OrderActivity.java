@@ -109,12 +109,17 @@ public class OrderActivity extends AppCompatActivity {
 
                 @Override
                 public void success(String json) {
-                    orders = JSON.parseObject(json, new TypeReference<List<List<Order>>>() {
-                    });
-                    Log.d("young","json data : " + json);
-                    // 为order中的food字段 手动赋值
-                    initFoodInOrders();
-                    initStoreInOrders();
+                    if("[]".equals(json)){
+                        Toast.makeText(getApplicationContext(),"当前还没有订单哦",Toast.LENGTH_LONG).show();
+                    }else{
+                        orders = JSON.parseObject(json, new TypeReference<List<List<Order>>>() {
+                        });
+                        Log.d("young","json data : " + json);
+                        // 为order中的food字段 手动赋值
+                        initFoodInOrders();
+                        initStoreInOrders();
+                    }
+
                 }
             });
         }
