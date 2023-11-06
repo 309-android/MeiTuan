@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,9 +21,21 @@ import com.androidClass.meituan.model.Store;
 import com.androidClass.meituan.utils.OKHttpUtils;
 import com.androidClass.meituan.utils.SPUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 首页的activity
@@ -40,10 +53,16 @@ public class HomePageActivity extends AppCompatActivity {
     // 添加地址按钮
     private Button toAddAddressButton;
 
+    private ImageLoaderConfiguration config;
+    private ImageLoader imageLoader = ImageLoader.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        // 初始化ImageLoader配置
+        initImageLoader();
 
         // 初始化底部导航栏
         initBottomNavigation();
@@ -51,31 +70,55 @@ public class HomePageActivity extends AppCompatActivity {
         // 添加地址按钮
         toAddAddressButton = findViewById(R.id.toAddAddress_Button);
 
-        // 美食按钮监听
-        findViewById(R.id.FineFood_Button).setOnClickListener(v -> {
-            Toast.makeText(getApplicationContext(), "this is fineFood module", Toast.LENGTH_LONG).show();
-        });
-
-        // 饮品按钮监听
-        findViewById(R.id.Drink_Button).setOnClickListener(v -> {
-            Toast.makeText(getApplicationContext(), "this is drink module", Toast.LENGTH_LONG).show();
-        });
-
-        // 超市按钮监听
-        findViewById(R.id.Market_Button).setOnClickListener(v -> {
-            Toast.makeText(getApplicationContext(), "this is superMarket module", Toast.LENGTH_LONG).show();
-        });
-
-        // 水果按钮监听
-        findViewById(R.id.Fruit_Button).setOnClickListener(v -> {
-            Toast.makeText(getApplicationContext(), "this is fruit module", Toast.LENGTH_LONG).show();
-        });
+        // 模块按钮监听
+        moduleButtonListener();
 
         // 初始化店铺
         initStores();
         // 添加地址按钮监听
         toAddAddress();
 
+    }
+
+    /**
+     * 模块按钮监听
+     */
+    private void moduleButtonListener() {
+        // 美食按钮监听
+        findViewById(R.id.FineFood_Button).setOnClickListener(v -> {
+            Intent intent = new Intent(this, ShowModuleActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("storeCategory","1");
+            intent.putExtras(bundle);
+            startActivity(intent);
+        });
+
+        // 饮品按钮监听
+        findViewById(R.id.Drink_Button).setOnClickListener(v -> {
+            Intent intent = new Intent(this, ShowModuleActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("storeCategory","2");
+            intent.putExtras(bundle);
+            startActivity(intent);
+        });
+
+        // 超市按钮监听
+        findViewById(R.id.Market_Button).setOnClickListener(v -> {
+            Intent intent = new Intent(this, ShowModuleActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("storeCategory","3");
+            intent.putExtras(bundle);
+            startActivity(intent);
+        });
+
+        // 水果按钮监听
+        findViewById(R.id.Fruit_Button).setOnClickListener(v -> {
+            Intent intent = new Intent(this, ShowModuleActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putString("storeCategory","4");
+            intent.putExtras(bundle);
+            startActivity(intent);
+        });
     }
 
     /**
@@ -113,7 +156,9 @@ public class HomePageActivity extends AppCompatActivity {
     private void initStores() {
         // 初始化店铺数据
         OKHttpUtils okHttpUtils = new OKHttpUtils();
-        okHttpUtils.get("/store/getAll");
+        Map<String,Object> map = new HashMap<>();
+        map.put("storeCategory","");
+        okHttpUtils.post("/store/get",map);
         okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
             @Override
             public void error(String error) {
@@ -129,7 +174,7 @@ public class HomePageActivity extends AppCompatActivity {
                 Log.d("young", "storeList : " + storeList.toString());
 
                 // 初始化listview
-                storeAdapter = new StoreAdapter(HomePageActivity.this, R.layout.store_item, storeList);
+                storeAdapter = new StoreAdapter(HomePageActivity.this, R.layout.store_item, storeList, imageLoader);
                 listview = (ListView) findViewById(R.id.storeList_ListView);
                 listview.setAdapter(storeAdapter);
 
@@ -166,5 +211,14 @@ public class HomePageActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "您还没有登录呢，请登录后查看地址", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    /**
+     * 初始化ImageLoader配置
+     */
+    private void initImageLoader(){
+        config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+                .build();
+        imageLoader.init(config);
     }
 }

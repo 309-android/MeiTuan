@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="#FF4C3D">
+
+        <ImageButton
+            android:id="@+id/backToHomePageFromModule_Button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/back"
+            android:background="#FF4C3D"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/moduleName_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="美食"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginRight="40dp"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F6F4F5"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/inputContent_EditText"
+            android:layout_width="370dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:backgroundTint="#FFFFFF"
+            android:background="@drawable/white_stroke"
+            android:hint="  请输入商家或商品名称"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/moduleList_ListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

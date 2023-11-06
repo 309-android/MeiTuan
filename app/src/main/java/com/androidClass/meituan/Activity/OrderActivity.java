@@ -19,6 +19,8 @@ import com.androidClass.meituan.model.Store;
 import com.androidClass.meituan.utils.OKHttpUtils;
 import com.androidClass.meituan.utils.SPUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,13 +36,21 @@ public class OrderActivity extends AppCompatActivity {
     // 订单数据
     private List<List<Order>> orders;
 
+    // 订单适配器
     private OrderAdapter orderAdapter;
+    // 订单ListView
     private ListView orderList_listView;
+
+    private ImageLoaderConfiguration config;
+    private ImageLoader imageLoader = ImageLoader.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+
+        // 初始化 ImageLoader
+        initImageLoader();
 
         // 初始化底部导航栏
         initBottomNavigation();
@@ -64,17 +74,17 @@ public class OrderActivity extends AppCompatActivity {
         // 设置默认选中订单
         navigationView.setSelectedItemId(R.id.item_order);
         navigationView.setOnNavigationItemSelectedListener(item -> {
-            if(item.getItemId() == R.id.item_home){
+            if (item.getItemId() == R.id.item_home) {
                 // 跳转到HomeActivity
                 Intent homeIntent = new Intent(OrderActivity.this, HomePageActivity.class);
                 startActivity(homeIntent);
                 return true;
-            }else if(item.getItemId() == R.id.item_order){
+            } else if (item.getItemId() == R.id.item_order) {
                 // 跳转到OrderActivity
 //                Intent profileIntent = new Intent(OrderActivity.this, OrderActivity.class);
 //                startActivity(profileIntent);
                 return true;
-            }else if(item.getItemId() == R.id.item_user){
+            } else if (item.getItemId() == R.id.item_user) {
                 // 跳转到IndividualMsgActivity
                 Intent settingsIntent = new Intent(OrderActivity.this, IndividualMsgActivity.class);
                 startActivity(settingsIntent);
@@ -87,20 +97,20 @@ public class OrderActivity extends AppCompatActivity {
     /**
      * 初始化订单数据
      */
-    private void initOrders(){
+    private void initOrders() {
         OKHttpUtils okHttpUtils = new OKHttpUtils();
         Bundle bundle = getIntent().getExtras();
         // 查看是否已保存用户数据
-        if(!SPUtils.contains(getApplicationContext(),"phoneNumber")){
+        if (!SPUtils.contains(getApplicationContext(), "phoneNumber")) {
             // 如果为保存用户数据
-            Toast.makeText(getApplicationContext(),"您当前还没登录呢，请登录后查看订单",Toast.LENGTH_LONG).show();
-        } else{
+            Toast.makeText(getApplicationContext(), "您当前还没登录呢，请登录后查看订单", Toast.LENGTH_LONG).show();
+        } else {
             // 登录时保存的手机号
-            String phoneNumber = (String) SPUtils.get(getApplicationContext(),"phoneNumber","");
+            String phoneNumber = (String) SPUtils.get(getApplicationContext(), "phoneNumber", "");
             // 放入map用作后端接受的参数
-            Map<String,Object> map = new HashMap<>();
-            map.put("phoneNumber",phoneNumber);
-            okHttpUtils.post("/order/getAllOrders",map);
+            Map<String, Object> map = new HashMap<>();
+            map.put("phoneNumber", phoneNumber);
+            okHttpUtils.post("/order/getAllOrders", map);
             okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
                 @Override
                 public void error(String error) {
@@ -109,12 +119,12 @@ public class OrderActivity extends AppCompatActivity {
 
                 @Override
                 public void success(String json) {
-                    if("[]".equals(json)){
-                        Toast.makeText(getApplicationContext(),"当前还没有订单哦",Toast.LENGTH_LONG).show();
-                    }else{
+                    if ("[]".equals(json)) {
+                        Toast.makeText(getApplicationContext(), "当前还没有订单哦", Toast.LENGTH_LONG).show();
+                    } else {
                         orders = JSON.parseObject(json, new TypeReference<List<List<Order>>>() {
                         });
-                        Log.d("young","json data : " + json);
+                        Log.d("young", "json data : " + json);
                         // 为order中的food字段 手动赋值
                         initFoodInOrders();
                         initStoreInOrders();
@@ -128,14 +138,14 @@ public class OrderActivity extends AppCompatActivity {
     /**
      * 为orders集合中的food 赋值
      */
-    private void initFoodInOrders(){
+    private void initFoodInOrders() {
         // 初始化订单中的食物
         OKHttpUtils okHttpUtils = new OKHttpUtils();
-        okHttpUtils.post("/food/getAllFood",null);
+        okHttpUtils.post("/food/getAllFood", null);
         okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
             @Override
             public void error(String error) {
-                Toast.makeText(getApplicationContext(),"服务器出错啦，请稍后再试",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "服务器出错啦，请稍后再试", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -146,7 +156,7 @@ public class OrderActivity extends AppCompatActivity {
                 for (List<Order> order : orders) {
                     for (Order orderDO : order) {
                         for (Food foodDO : foodDOS) {
-                            if(foodDO.getId() == orderDO.getFoodId()){
+                            if (foodDO.getId() == orderDO.getFoodId()) {
                                 orderDO.setFood(foodDO);
                             }
                         }
@@ -161,7 +171,9 @@ public class OrderActivity extends AppCompatActivity {
     private void initStoreInOrders() {
         // 初始化订单中的店铺
         OKHttpUtils okHttpUtils = new OKHttpUtils();
-        okHttpUtils.get("/store/getAll");
+        Map<String, Object> map = new HashMap<>();
+        map.put("storeCategory", "");
+        okHttpUtils.post("/store/get", map);
         okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
             @Override
             public void error(String error) {
@@ -177,19 +189,28 @@ public class OrderActivity extends AppCompatActivity {
                 for (List<Order> order : orders) {
                     for (Order orderDO : order) {
                         for (Store store : stores) {
-                            if (orderDO.getStoreId() == store.getId()){
+                            if (orderDO.getStoreId() == store.getId()) {
                                 orderDO.setStore(store);
                             }
                         }
                     }
                 }
-                Log.d("young","orders data : " + orders.toString());
+                Log.d("young", "orders data : " + orders.toString());
 
                 // 初始化listview
-                orderAdapter = new OrderAdapter(OrderActivity.this, R.layout.order_item, orders);
+                orderAdapter = new OrderAdapter(OrderActivity.this, R.layout.order_item, orders, imageLoader );
                 orderList_listView = (ListView) findViewById(R.id.orderList_ListView);
                 orderList_listView.setAdapter(orderAdapter);
             }
         });
+    }
+
+    /**
+     * 初始化ImageLoader配置
+     */
+    private void initImageLoader(){
+        config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+                .build();
+        imageLoader.init(config);
     }
 }

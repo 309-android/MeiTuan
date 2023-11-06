@@ -15,6 +15,8 @@ import androidx.annotation.Nullable;
 import com.androidClass.meituan.R;
 import com.androidClass.meituan.model.Order;
 import com.androidClass.meituan.utils.getImageResourceId;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -22,9 +24,13 @@ public class OrderAdapter extends ArrayAdapter {
 
     private final int resourceId;
 
-    public OrderAdapter(Context context, int textViewResourceId, List<List<Order>> orders){
+    // 创建ImageLoader对象
+    private ImageLoader imageLoader ;
+
+    public OrderAdapter(Context context, int textViewResourceId, List<List<Order>> orders, ImageLoader imageLoader){
         super(context,textViewResourceId,orders);
         resourceId = textViewResourceId;
+        this.imageLoader = imageLoader;
     }
 
     @NonNull
@@ -61,10 +67,18 @@ public class OrderAdapter extends ArrayAdapter {
         // 设置值
         // orderStoreImage.setImageResource(getImageResourceId.getImageResourceId(getContext(),order.get));
 
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .build();
+
+
+
         if(orders.size() == 1){
             Order orderDO = orders.get(0);
             // 店铺缩略图
-            orderStoreImage.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO.getStore().getImage()));
+            imageLoader.displayImage(orderDO.getStore().getImage(), orderStoreImage, options);
+//            orderStoreImage.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO.getStore().getImage()));
             // 店铺名
             orderStoreName.setText(orderDO.getStore().getStoreName());
             // 订单状态
@@ -81,17 +95,20 @@ public class OrderAdapter extends ArrayAdapter {
             Order orderDO1 = orders.get(0);
             Order orderDO2 = orders.get(1);
             // 店铺缩略图
-            orderStoreImage.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO1.getStore().getImage()));
+            imageLoader.displayImage(orderDO1.getStore().getImage(), orderStoreImage, options);
+//            orderStoreImage.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO1.getStore().getImage()));
             // 店铺名
             orderStoreName.setText(orderDO1.getStore().getStoreName());
             // 订单状态
             orderStatus.setText(orderDO1.getStatus().equals("0") ? "已完成":"未完成");
             // 食物图片1
-            orderFoodImageOne.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO1.getFood().getFoodImg()));
+            imageLoader.displayImage(orderDO1.getFood().getFoodImg(), orderFoodImageOne, options);
+//            orderFoodImageOne.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO1.getFood().getFoodImg()));
             // 食物名字1
             orderFoodNameOne.setText(orderDO1.getFood().getFoodName());
             // 食物图片2
-            orderFoodImageTwo.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO2.getFood().getFoodImg()));
+            imageLoader.displayImage(orderDO2.getFood().getFoodImg(), orderFoodImageTwo, options);
+//            orderFoodImageTwo.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO2.getFood().getFoodImg()));
             // 食物名字2
             orderFoodNameTwo.setText(orderDO2.getFood().getFoodName());
             // 订单金额
@@ -104,21 +121,25 @@ public class OrderAdapter extends ArrayAdapter {
             Order orderDO2 = orders.get(1);
             Order orderDO3 = orders.get(2);
             // 店铺缩略图
-            orderStoreImage.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO1.getStore().getImage()));
+            imageLoader.displayImage(orderDO1.getStore().getImage(), orderStoreImage, options);
+//            orderStoreImage.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO1.getStore().getImage()));
             // 店铺名
             orderStoreName.setText(orderDO1.getStore().getStoreName());
             // 订单状态
             orderStatus.setText(orderDO1.getStatus().equals("0") ? "已完成":"未完成");
             // 食物图片1
-            orderFoodImageOne.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO1.getFood().getFoodImg()));
+            imageLoader.displayImage(orderDO1.getFood().getFoodImg(), orderFoodImageOne, options);
+//            orderFoodImageOne.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO1.getFood().getFoodImg()));
             // 食物名字1
             orderFoodNameOne.setText(orderDO1.getFood().getFoodName());
             // 食物图片2
-            orderFoodImageTwo.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO2.getFood().getFoodImg()));
+            imageLoader.displayImage(orderDO2.getFood().getFoodImg(), orderFoodImageTwo, options);
+//            orderFoodImageTwo.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO2.getFood().getFoodImg()));
             // 食物名字2
             orderFoodNameTwo.setText(orderDO2.getFood().getFoodName());
             // 食物图片3
-            orderFoodImageThree.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO3.getFood().getFoodImg()));
+            imageLoader.displayImage(orderDO3.getFood().getFoodImg(), orderFoodImageThree, options);
+//            orderFoodImageThree.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO3.getFood().getFoodImg()));
             // 食物名字3
             orderFoodNameThree.setText(orderDO3.getFood().getFoodName());
             // 订单金额
