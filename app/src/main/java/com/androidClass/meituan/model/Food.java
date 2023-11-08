@@ -21,9 +21,9 @@ public class Food implements Serializable {
     // 食物价格
     private String foodAmount;
 
+    // 食物月售
+    private String monthSale;
 
-    public Food() {
-    }
 
     @Override
     public String toString() {
@@ -33,7 +33,19 @@ public class Food implements Serializable {
                 ", foodName='" + foodName + '\'' +
                 ", foodImg='" + foodImg + '\'' +
                 ", foodAmount='" + foodAmount + '\'' +
+                ", monthSale='" + monthSale + '\'' +
                 '}';
+    }
+
+    public String getMonthSale() {
+        return monthSale;
+    }
+
+    public void setMonthSale(String monthSale) {
+        this.monthSale = monthSale;
+    }
+
+    public Food() {
     }
 
     public Integer getId() {

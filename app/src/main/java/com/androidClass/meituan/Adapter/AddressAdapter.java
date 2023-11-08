@@ -61,7 +61,16 @@ public class AddressAdapter extends ArrayAdapter {
         detail_TextView.setText(address.getDetail());
         consignee_TextView.setText(address.getConsignee());
         gender_TextView.setText("1".equals(address.getSex()) ? "先生" : "女士");
-        phoneNumber_TextView.setText(address.getPhoneNumber());
+
+        String[] split = address.getPhoneNumber().split("");
+        StringBuilder phone = new StringBuilder();
+        for (int i = 0; i < split.length; i++) {
+            if ( i >= 4){
+                split[i] = "*";
+            }
+            phone.append(split[i]);
+        }
+        phoneNumber_TextView.setText(phone);
 
 
         return view;

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -52,6 +53,7 @@ public class ShowModuleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_module);
         // 返回按钮
         initBackButton();
+
         // 模块名
         moduleName = findViewById(R.id.moduleName_TextView);
         // 数据list
@@ -106,7 +108,8 @@ public class ShowModuleActivity extends AppCompatActivity {
                     // 初始化listview
                     storeAdapter = new StoreAdapter(ShowModuleActivity.this, R.layout.store_item, stores,imageLoader);
                     moduleList.setAdapter(storeAdapter);
-
+                    // 点击店铺事件
+                    clickStore();
                 }
             });
 
@@ -134,5 +137,29 @@ public class ShowModuleActivity extends AppCompatActivity {
         config = new ImageLoaderConfiguration.Builder(getApplicationContext())
                 .build();
         imageLoader.init(config);
+    }
+
+
+    /**
+     * 点击店铺逻辑
+     */
+    public void clickStore() {
+        // 设置点击store事件
+        moduleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Toast.makeText(getApplicationContext(), "点了一下 "
+                        + stores.get(position).getId().toString()
+                        + stores.get(position).getStoreName(), Toast.LENGTH_LONG).show();
+                // 点击店铺进入店铺
+                Intent intent = new Intent(ShowModuleActivity.this, FoodActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("storeId",stores.get(position).getId().toString());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+
+        });
     }
 }

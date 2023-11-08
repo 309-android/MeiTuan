@@ -27,8 +27,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="15dp"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/test3" />
+                android:scaleType="fitXY"/>
 
             <!--店铺名字-->
             <TextView

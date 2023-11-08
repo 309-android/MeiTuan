@@ -17,6 +17,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.androidClass.meituan.Adapter.StoreAdapter;
 import com.androidClass.meituan.R;
+import com.androidClass.meituan.model.Address;
 import com.androidClass.meituan.model.Store;
 import com.androidClass.meituan.utils.OKHttpUtils;
 import com.androidClass.meituan.utils.SPUtils;
@@ -63,6 +64,9 @@ public class HomePageActivity extends AppCompatActivity {
 
         // 初始化ImageLoader配置
         initImageLoader();
+
+        // 检查地址信息
+        checkAddress();
 
         // 初始化底部导航栏
         initBottomNavigation();
@@ -192,10 +196,14 @@ public class HomePageActivity extends AppCompatActivity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "点了一下 "
-                        + storeList.get(position).getId().toString()
-                        + storeList.get(position).getStoreName(), Toast.LENGTH_LONG).show();
+                // 点击店铺进入店铺
+                Intent intent = new Intent(HomePageActivity.this, FoodActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("storeId",storeList.get(position).getId().toString());
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
+
         });
     }
 
@@ -203,7 +211,6 @@ public class HomePageActivity extends AppCompatActivity {
      * 添加地址按钮监听
      */
     private void toAddAddress() {
-
         toAddAddressButton.setOnClickListener(v -> {
             if (SPUtils.contains(getApplicationContext(),"phoneNumber")) {
                 startActivity(new Intent(this, MyAddressActivity.class));
@@ -220,5 +227,45 @@ public class HomePageActivity extends AppCompatActivity {
         config = new ImageLoaderConfiguration.Builder(getApplicationContext())
                 .build();
         imageLoader.init(config);
+    }
+
+    /**
+     * 查看用户是否存在地址信息
+     */
+    private void checkAddress(){
+        OKHttpUtils okHttpUtils = new OKHttpUtils();
+        if (SPUtils.contains(getApplicationContext(),"phoneNumber")){
+            // 已登录 查询地址信息
+            String phoneNumber = (String) SPUtils.get(getApplicationContext(), "phoneNumber", "");
+            Map<String,Object> map = new HashMap<>();
+            map.put("phoneNumber",phoneNumber);
+            okHttpUtils.post("/address/getAll",map);
+            okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
+                @Override
+                public void error(String error) {
+                    Toast.makeText(getApplicationContext(), "服务器出错啦，请稍后再试", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void success(String json) {
+                    List<Address> addresses = JSON.parseObject(json, new TypeReference<List<Address>>() {
+                    });
+                    Log.d("young","homePageAddressCheck : " + addresses.toString());
+                    if ("[]".equals(addresses.toString())){
+                        // 该用户无地址信息 设置按钮显示内容为添加地址
+                        toAddAddressButton.setText("添加地址");
+                    } else{
+                      toAddAddressButton.setText("选择地址");
+                        for (Address address : addresses) {
+                            if ("1".equals(address.getIsDefault())){
+                                toAddAddressButton.setText(address.getDetail());
+                            }
+                        }
+                    }
+                }
+            });
+        } else{
+          // 未登录
+        }
     }
 }

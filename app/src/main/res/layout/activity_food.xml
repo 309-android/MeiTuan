@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/backToHomePageFromFood_Button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/left"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:background="#FFFFFF"
+            android:layout_gravity="center"/>
+
+        <ImageButton
+            android:id="@+id/searchFood_Button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/search"
+            android:background="#FFFFFF"
+            android:layout_gravity="center"
+            android:layout_marginLeft="250dp"/>
+
+        <ImageButton
+            android:id="@+id/starStore_Button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/grey_star"
+            android:background="#FFFFFF"
+            android:layout_marginLeft="30dp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="320dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/storeName_TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="店铺名字"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:maxEms="10"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/star"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="20dp"/>
+
+
+                <TextView
+                    android:id="@+id/storeScore_TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FE9E00"
+                    android:text="X.X"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="美团专送"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/grey_stroke"/>
+
+                <TextView
+                    android:id="@+id/monthSale_TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="月售xxx+"
+                    android:layout_marginLeft="20dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/storeImage_ImageView"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/storeSummary_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="店铺简介"
+            android:maxLines="1"
+            android:maxEms="25"
+            android:ellipsize="end"
+            android:layout_marginLeft="20dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/makeOrders_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="#FFFFFF"
+            android:text="点菜"
+            style="?android:attr/borderlessButtonStyle"
+            android:textSize="19sp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:gravity="start|center"/>
+
+        <Button
+            android:id="@+id/showComment_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="#FFFFFF"
+            android:text="评价"
+            style="?android:attr/borderlessButtonStyle"
+            android:textSize="19sp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:gravity="start|center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="400dp">
+
+            <ListView
+                android:id="@+id/categoryList_ListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="400dp">
+
+            <ListView
+                android:id="@+id/foodList_ListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

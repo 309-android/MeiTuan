@@ -26,12 +26,12 @@ public class Store implements Serializable {
     private String deliveryNum;
     // 店铺评价
     private String comment;
+    // 店铺简介
+    private String summary;
 
-
-    public Store() {
+    public void setId(Integer id) {
+        this.id = id;
     }
-
-
 
     @Override
     public String toString() {
@@ -45,8 +45,21 @@ public class Store implements Serializable {
                 ", minTakeOutNum='" + minTakeOutNum + '\'' +
                 ", deliveryNum='" + deliveryNum + '\'' +
                 ", comment='" + comment + '\'' +
+                ", summary='" + summary + '\'' +
                 '}';
     }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public Store() {
+    }
+
 
     public Integer getId() {
         return id;

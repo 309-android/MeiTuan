@@ -204,6 +204,7 @@ public class AddAddressActivity extends AppCompatActivity {
                         });
                         if ("success".equals(addStatus)){
                             Toast.makeText(getApplicationContext(),"保存地址成功！",Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(AddAddressActivity.this, MyAddressActivity.class));
                         }else if("error".equals(addStatus)){
                             Toast.makeText(getApplicationContext(),"服务器出错啦，请稍后再试！",Toast.LENGTH_LONG).show();
                         }
