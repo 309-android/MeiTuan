@@ -21,6 +21,7 @@
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:background="#FFFFFF"
+            android:layout_marginLeft="5dp"
             android:scaleType="fitXY"
             android:src="@drawable/back" />
 
@@ -28,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="100dp"
+            android:layout_marginLeft="95dp"
             android:text="选择收货地址"
             android:textColor="#000000"
             android:textSize="20sp"

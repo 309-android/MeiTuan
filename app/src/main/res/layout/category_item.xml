@@ -4,11 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
+    <TextView
+        android:id="@+id/chooseCategory"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="分类"
-        android:background="#FFFFFF"
-        android:textSize="17sp"/>
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="18sp"/>
     
 </LinearLayout>

@@ -6,13 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidClass.meituan.Adapter.CategoryAdapter;
 import com.androidClass.meituan.Adapter.FoodAdapter;
 import com.androidClass.meituan.Adapter.StoreAdapter;
+import com.androidClass.meituan.model.Category;
 import com.androidClass.meituan.model.Food;
 import com.androidClass.meituan.utils.getImageResourceId;
 
@@ -47,9 +50,15 @@ public class FoodActivity extends AppCompatActivity {
     private DisplayImageOptions options;
     private ListView foodListView;
 
+    private ListView categoryListView;
+
+    private List<Category> categories;
+
     private List<Food> foods;
 
     private FoodAdapter foodAdapter;
+
+    private CategoryAdapter categoryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +72,9 @@ public class FoodActivity extends AppCompatActivity {
 
         // 初始化菜品
         initFood();
+
+        // 初始化分类
+        initCategory();
 
     }
 
@@ -121,6 +133,9 @@ public class FoodActivity extends AppCompatActivity {
                 .build();
     }
 
+    /**
+     * 初始化菜品
+     */
     private void initFood(){
 
         // 首页传来的店铺id
@@ -132,13 +147,10 @@ public class FoodActivity extends AppCompatActivity {
         map.put("storeId",storeId);
         okHttpUtils.post("/food/getByStoreId",map);
         okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
-
-
             @Override
             public void error(String error) {
                 Toast.makeText(getApplicationContext(), "服务器出错啦，请稍后再试", Toast.LENGTH_LONG).show();
             }
-
             @Override
             public void success(String json) {
                 foods = JSON.parseObject(json, new TypeReference<List<Food>>() {
@@ -154,11 +166,83 @@ public class FoodActivity extends AppCompatActivity {
                     foodListView = (ListView) findViewById(R.id.foodList_ListView);
                     foodListView.setAdapter(foodAdapter);
                 }
-
             }
         });
+    }
 
+    /**
+     * 初始化分类
+     */
+    private void initCategory(){
+        // 首页传来的店铺id
+        Bundle bundle = getIntent().getExtras();
+        String storeId = (String) bundle.get("storeId");
 
+        OKHttpUtils okHttpUtils = new OKHttpUtils();
+        Map<String,Object> map = new HashMap<>();
+        map.put("storeId",storeId);
+        okHttpUtils.post("/category/getAllByStoreId",map);
+        okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
+            @Override
+            public void error(String error) {
+                Toast.makeText(getApplicationContext(), "服务器出错啦，请稍后再试", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void success(String json) {
+                categories = JSON.parseObject(json,new TypeReference<List<Category>>(){});
+
+                if ("[]".equals(categories.toString())){
+                    Toast.makeText(getApplicationContext(), "当前店铺还没有菜品分类哦", Toast.LENGTH_LONG).show();
+                }else {
+                    // 初始化listview
+                    categoryAdapter = new CategoryAdapter(FoodActivity.this, R.layout.category_item, categories);
+                    categoryListView = (ListView) findViewById(R.id.categoryList_ListView);
+                    categoryListView.setAdapter(categoryAdapter);
+
+                    // 分类点击事件
+                    clickCategory();
+                }
+            }
+        });
+    }
+
+    /**
+     * 分类的点击事件
+     */
+    private void clickCategory(){
+        categoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(),
+                        "点了一下" + categories.get(position).getName(),
+                        Toast.LENGTH_LONG).show();
+
+                OKHttpUtils okHttpUtils = new OKHttpUtils();
+                Map<String,Object> map = new HashMap<>();
+                map.put("categoryId",categories.get(position).getId());
+                okHttpUtils.post("food/getByCategoryId",map);
+                okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
+                    @Override
+                    public void error(String error) {
+                        Toast.makeText(getApplicationContext(), "服务器出错啦，请稍后再试", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void success(String json) {
+                        categories = JSON.parseObject(json,new TypeReference<List<Category>>(){});
+
+                        if ("[]".equals(categories.toString())){
+                            Toast.makeText(getApplicationContext(), "当前店铺还没有菜品分类哦", Toast.LENGTH_LONG).show();
+                        }else {
+                            categoryAdapter.clear();  // 清空原有数据
+                            categoryAdapter.addAll(categories);  // 添加新数据
+                            categoryAdapter.notifyDataSetChanged();  // 刷新界面
+                        }
+                    }
+                });
+            }
+        });
 
     }
 }

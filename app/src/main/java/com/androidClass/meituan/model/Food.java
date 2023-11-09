@@ -12,6 +12,9 @@ public class Food implements Serializable {
     // 店铺id
     private Integer storeId;
 
+    // 分类id
+    private Integer CategoryId;
+
     // 食物名字
     private String foodName;
 
@@ -30,11 +33,20 @@ public class Food implements Serializable {
         return "Food{" +
                 "id=" + id +
                 ", storeId=" + storeId +
+                ", CategoryId=" + CategoryId +
                 ", foodName='" + foodName + '\'' +
                 ", foodImg='" + foodImg + '\'' +
                 ", foodAmount='" + foodAmount + '\'' +
                 ", monthSale='" + monthSale + '\'' +
                 '}';
+    }
+
+    public Integer getCategoryId() {
+        return CategoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        CategoryId = categoryId;
     }
 
     public String getMonthSale() {

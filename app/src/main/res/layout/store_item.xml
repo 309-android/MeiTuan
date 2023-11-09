@@ -75,14 +75,6 @@
                     android:text="人均 ￥xx"
                     android:textSize="15sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:background="@drawable/grey_stroke"
-                    android:text="美团专送"
-                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -107,6 +99,15 @@
                     android:layout_marginLeft="10dp"
                     android:text="配送 约￥X"
                     android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/grey_stroke"
+                    android:text="美团专送"
+                    android:textSize="12sp" />
 
 <!--                <TextView-->
 <!--                    android:id="@+id/storeId_TextView"-->

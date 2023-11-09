@@ -19,6 +19,7 @@
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             android:src="@drawable/back"
+            android:layout_marginLeft="5dp"
             android:background="#FF4C3D"
             android:layout_gravity="center"/>
 

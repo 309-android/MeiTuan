@@ -58,7 +58,7 @@
     <!--订单展示布局-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="432dp"
+        android:layout_height="552dp"
         android:background="#F5F5F5"
         android:orientation="vertical">
 
