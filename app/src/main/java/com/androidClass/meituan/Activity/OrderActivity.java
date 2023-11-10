@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -43,11 +44,19 @@ public class OrderActivity extends AppCompatActivity {
 
     private ImageLoaderConfiguration config;
     private ImageLoader imageLoader = ImageLoader.getInstance();
+    private View makeOrdersUnderline;
+    private View showCommentUnderline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
+
+        // 默认选中全部订单
+        makeOrdersUnderline = findViewById(R.id.getAllOrdersUnderline_View);
+        showCommentUnderline = findViewById(R.id.getNoCommentsUnderline_View);
+
+        makeOrdersUnderline.setVisibility(View.VISIBLE);  // 显示小横线
 
         // 初始化 ImageLoader
         initImageLoader();
@@ -56,12 +65,36 @@ public class OrderActivity extends AppCompatActivity {
         initBottomNavigation();
 
         getAllOrdersButton = findViewById(R.id.getAllOrders_Button);
+        // 点击全部订单监听
+        clickGetAllOrders();
 
         getNoCommentsOrdersButton = findViewById(R.id.getNoCommentsOrders_Button);
+        // 点击待评论监听
+        clickGetNoComments();
 
         // 初始化订单数据
         initOrders();
 
+    }
+
+    /**
+     * 点击待评论监听
+     */
+    private void clickGetNoComments(){
+        getNoCommentsOrdersButton.setOnClickListener(v ->{
+            makeOrdersUnderline.setVisibility(View.INVISIBLE);  // 显示小横线
+            showCommentUnderline.setVisibility(View.VISIBLE); // 隐藏评论的横线
+        });
+    }
+
+    /**
+     * 点击全部订单监听
+     */
+    private void clickGetAllOrders(){
+        getAllOrdersButton.setOnClickListener(v -> {
+            makeOrdersUnderline.setVisibility(View.VISIBLE);  // 显示小横线
+            showCommentUnderline.setVisibility(View.INVISIBLE); // 隐藏评论的横线
+        });
     }
 
     /**

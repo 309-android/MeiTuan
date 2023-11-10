@@ -3,10 +3,12 @@ package com.androidClass.meituan.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -59,11 +61,21 @@ public class FoodActivity extends AppCompatActivity {
     private FoodAdapter foodAdapter;
 
     private CategoryAdapter categoryAdapter;
+    private Button makeOrdersButton;
+
+    Button showCommentButton;
+    View makeOrdersUnderline;
+    View showCommentUnderline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
+
+        makeOrdersUnderline = findViewById(R.id.makeOrdersUnderline_View);
+        showCommentUnderline = findViewById(R.id.showCommentUnderline_View);
+
+        makeOrdersUnderline.setVisibility(View.VISIBLE);  // 显示小横线
 
         // 初始化ImageLoader配置
         initImageLoader();
@@ -73,9 +85,35 @@ public class FoodActivity extends AppCompatActivity {
         // 初始化菜品
         initFood();
 
+        // 点菜监听
+        clickMakeOrders();
+
+        // 评价监听
+        clickShowComments();
+
         // 初始化分类
         initCategory();
 
+    }
+
+    private void clickShowComments(){
+        showCommentButton = findViewById(R.id.showComment_Button);
+
+        showCommentButton.setOnClickListener(v -> {
+            showCommentUnderline.setVisibility(View.VISIBLE);  // 显示小横线
+            makeOrdersUnderline.setVisibility(View.INVISIBLE);  // 隐藏另一个按钮的小横线
+
+        });
+    }
+
+    private void clickMakeOrders() {
+        makeOrdersButton = findViewById(R.id.makeOrders_Button);
+
+        makeOrdersButton.setOnClickListener( v -> {
+            makeOrdersUnderline.setVisibility(View.VISIBLE);  // 显示小横线
+            showCommentUnderline.setVisibility(View.INVISIBLE);  // 隐藏另一个按钮的小横线
+            initFood();
+        });
     }
 
     /**
@@ -142,6 +180,7 @@ public class FoodActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         String storeId = (String) bundle.get("storeId");
 
+
         OKHttpUtils okHttpUtils = new OKHttpUtils();
         Map<String,Object> map = new HashMap<>();
         map.put("storeId",storeId);
@@ -201,7 +240,7 @@ public class FoodActivity extends AppCompatActivity {
                     categoryListView.setAdapter(categoryAdapter);
 
                     // 分类点击事件
-                    clickCategory();
+                    clickCategory(okHttpUtils);
                 }
             }
         });
@@ -210,18 +249,17 @@ public class FoodActivity extends AppCompatActivity {
     /**
      * 分类的点击事件
      */
-    private void clickCategory(){
+    private void clickCategory(OKHttpUtils okHttpUtils){
         categoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(),
-                        "点了一下" + categories.get(position).getName(),
-                        Toast.LENGTH_LONG).show();
 
-                OKHttpUtils okHttpUtils = new OKHttpUtils();
+                categoryAdapter.setSelectedPosition(position);  // 更新被点击的位置
+
                 Map<String,Object> map = new HashMap<>();
                 map.put("categoryId",categories.get(position).getId());
-                okHttpUtils.post("food/getByCategoryId",map);
+
+                okHttpUtils.post("/food/getByCategoryId",map);
                 okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
                     @Override
                     public void error(String error) {
@@ -230,14 +268,14 @@ public class FoodActivity extends AppCompatActivity {
 
                     @Override
                     public void success(String json) {
-                        categories = JSON.parseObject(json,new TypeReference<List<Category>>(){});
+                        foods = JSON.parseObject(json,new TypeReference<List<Food>>(){});
 
                         if ("[]".equals(categories.toString())){
                             Toast.makeText(getApplicationContext(), "当前店铺还没有菜品分类哦", Toast.LENGTH_LONG).show();
                         }else {
-                            categoryAdapter.clear();  // 清空原有数据
-                            categoryAdapter.addAll(categories);  // 添加新数据
-                            categoryAdapter.notifyDataSetChanged();  // 刷新界面
+                            foodAdapter.clear();  // 清空原有数据
+                            foodAdapter.addAll(foods);  // 添加新数据
+                            foodAdapter.notifyDataSetChanged();  // 刷新界面
                         }
                     }
                 });

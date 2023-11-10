@@ -31,27 +31,64 @@
         android:orientation="horizontal">
 
 
-        <Button
-            android:id="@+id/getAllOrders_Button"
-            style="?android:attr/borderlessButtonStyle"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/order_button_selector"
-            android:text="全部订单"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/getNoCommentsOrders_Button"
-            style="?android:attr/borderlessButtonStyle"
+            <Button
+                android:id="@+id/getAllOrders_Button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/order_button_selector"
+                android:text="全部订单"
+                android:layout_marginTop="5dp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/getAllOrdersUnderline_View"
+                android:layout_width="20dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/underline"
+                android:visibility="invisible" />  <!-- 初始时隐藏小横线 -->
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/order_button_selector"
-            android:text="待评价"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/getNoCommentsOrders_Button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/order_button_selector"
+                android:text="待评价"
+                android:layout_marginTop="5dp"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/getNoCommentsUnderline_View"
+                android:layout_width="20dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/underline"
+                android:visibility="invisible" />  <!-- 初始时隐藏小横线 -->
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
