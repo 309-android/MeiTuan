@@ -3,12 +3,12 @@ package com.androidClass.meituan.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,10 +16,9 @@ import android.widget.Toast;
 
 import com.androidClass.meituan.Adapter.CategoryAdapter;
 import com.androidClass.meituan.Adapter.FoodAdapter;
-import com.androidClass.meituan.Adapter.StoreAdapter;
 import com.androidClass.meituan.model.Category;
 import com.androidClass.meituan.model.Food;
-import com.androidClass.meituan.utils.getImageResourceId;
+import com.androidClass.meituan.utils.SPUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -66,6 +65,8 @@ public class FoodActivity extends AppCompatActivity {
     Button showCommentButton;
     View makeOrdersUnderline;
     View showCommentUnderline;
+    ImageButton backToHomePageFromFoodButton;
+    ImageButton starStoreButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +76,15 @@ public class FoodActivity extends AppCompatActivity {
         makeOrdersUnderline = findViewById(R.id.makeOrdersUnderline_View);
         showCommentUnderline = findViewById(R.id.showCommentUnderline_View);
 
+        // 返回按钮
+        backToHomePageFromFoodButton = findViewById(R.id.backToHomePageFromFood_Button);
+        // 收藏按钮
+        starStoreButton = findViewById(R.id.starStore_Button);
+
         makeOrdersUnderline.setVisibility(View.VISIBLE);  // 显示小横线
+        // 获取店铺id
+        Bundle extras = getIntent().getExtras();
+        String storeId = (String) extras.get("storeId");
 
         // 初始化ImageLoader配置
         initImageLoader();
@@ -93,6 +102,12 @@ public class FoodActivity extends AppCompatActivity {
 
         // 初始化分类
         initCategory();
+
+        // 返回按钮监听
+        backToHomePageFromFoodButtonListener();
+
+        // 收藏按钮监听
+        starStoreButtonListener(storeId);
 
     }
 
@@ -282,5 +297,43 @@ public class FoodActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    /**
+     * 返回按钮监听
+     */
+    private void backToHomePageFromFoodButtonListener(){
+        backToHomePageFromFoodButton.setOnClickListener(v->{
+            startActivity(new Intent(FoodActivity.this,HomePageActivity.class));
+        });
+    }
+
+    /**
+     * 收藏按钮监听
+     */
+    private void starStoreButtonListener(String storeId){
+        starStoreButton.setOnClickListener(v->{
+            // 获取用户手机号
+            String phoneNumber = (String) SPUtils.get(getApplicationContext(), "phoneNumber", "");
+            OKHttpUtils okHttpUtils = new OKHttpUtils();
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("phoneNumber",phoneNumber);
+            map.put("storeId",storeId);
+            okHttpUtils.POST_JSON("/star/newStar",map);
+            okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
+                @Override
+                public void error(String error) {
+                    Toast.makeText(getApplicationContext(),"服务器出错啦，请稍后再试！",Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void success(String json) {
+                    String isStarred = JSON.parseObject(json, new TypeReference<String>() {
+                    });
+                    // 返回信息
+                    Toast.makeText(getApplicationContext(),isStarred,Toast.LENGTH_LONG).show();
+                }
+            });
+        });
     }
 }

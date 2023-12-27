@@ -56,9 +56,7 @@ public class OKHttpUtils {
     private static final String TAG = "OKHttpUitls";
     private OkHttpClient client = null;
 
-    private String BaseUrl="http://47.111.162.181:7070";
-
-//    private String BaseUrl="http://47.100.104.187:8080/ssm05/";
+    private String BaseUrl="http://10.0.2.2:7070";
 
     // /get
     public void get(String url) {
