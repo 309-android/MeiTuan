@@ -312,15 +312,42 @@ public class FoodActivity extends AppCompatActivity {
      * 收藏按钮监听
      */
     private void starStoreButtonListener(String storeId){
+        // 收藏按钮颜色变更
+        // 获取用户手机号
+        String phoneNumber = (String) SPUtils.get(getApplicationContext(), "phoneNumber", "");
+        OKHttpUtils okHttpUtils = new OKHttpUtils();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("phoneNumber",phoneNumber);
+        map.put("storeId",storeId);
+        okHttpUtils.POST_JSON("/star/isStarred",map);
+        okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
+            @Override
+            public void error(String error) {
+                Toast.makeText(getApplicationContext(),"服务器出错啦，请稍后再试！",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void success(String json) {
+                String isStarred = JSON.parseObject(json, new TypeReference<String>() {
+                });
+                // 返回信息
+//                Toast.makeText(getApplicationContext(),isStarred,Toast.LENGTH_LONG).show();
+                if ("已收藏".equals(isStarred)){
+                    // 设置为小黄星
+                    starStoreButton.setImageResource(R.drawable.star);
+                }
+
+            }
+        });
+
+
         starStoreButton.setOnClickListener(v->{
-            // 获取用户手机号
-            String phoneNumber = (String) SPUtils.get(getApplicationContext(), "phoneNumber", "");
-            OKHttpUtils okHttpUtils = new OKHttpUtils();
-            HashMap<String, Object> map = new HashMap<>();
-            map.put("phoneNumber",phoneNumber);
-            map.put("storeId",storeId);
-            okHttpUtils.POST_JSON("/star/newStar",map);
-            okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
+            HashMap<String, Object> map1 = new HashMap<>();
+            OKHttpUtils okHttpUtils1 = new OKHttpUtils();
+            map1.put("phoneNumber",phoneNumber);
+            map1.put("storeId",storeId);
+            okHttpUtils1.POST_JSON("/star/newStar",map1);
+            okHttpUtils1.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
                 @Override
                 public void error(String error) {
                     Toast.makeText(getApplicationContext(),"服务器出错啦，请稍后再试！",Toast.LENGTH_LONG).show();
@@ -331,6 +358,13 @@ public class FoodActivity extends AppCompatActivity {
                     String isStarred = JSON.parseObject(json, new TypeReference<String>() {
                     });
                     // 返回信息
+                    if ("收藏成功！".equals(isStarred)){
+                        // 设置为小黄星
+                        starStoreButton.setImageResource(R.drawable.star);
+                    } else if ("取消收藏成功！".equals(isStarred)) {
+                        // 恢复
+                        starStoreButton.setImageResource(R.drawable.grey_star);
+                    }
                     Toast.makeText(getApplicationContext(),isStarred,Toast.LENGTH_LONG).show();
                 }
             });
