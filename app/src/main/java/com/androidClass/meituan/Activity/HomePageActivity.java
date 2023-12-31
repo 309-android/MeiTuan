@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -54,6 +55,9 @@ public class HomePageActivity extends AppCompatActivity {
     // 添加地址按钮
     private Button toAddAddressButton;
 
+    private EditText searchFoodEditText;
+    private Button searchFoodButton;
+
     private ImageLoaderConfiguration config;
     private ImageLoader imageLoader = ImageLoader.getInstance();
 
@@ -74,6 +78,9 @@ public class HomePageActivity extends AppCompatActivity {
         // 添加地址按钮
         toAddAddressButton = findViewById(R.id.toAddAddress_Button);
 
+        searchFoodEditText = findViewById(R.id.searchFood_EditText);
+        searchFoodButton = findViewById(R.id.searchFood_Button);
+
         // 模块按钮监听
         moduleButtonListener();
 
@@ -82,6 +89,7 @@ public class HomePageActivity extends AppCompatActivity {
         // 添加地址按钮监听
         toAddAddress();
 
+        searchFoodButtonListener();
     }
 
     /**
@@ -200,6 +208,7 @@ public class HomePageActivity extends AppCompatActivity {
                 Intent intent = new Intent(HomePageActivity.this, FoodActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("storeId",storeList.get(position).getId().toString());
+                // TODO 实现记录浏览位置功能
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -267,5 +276,40 @@ public class HomePageActivity extends AppCompatActivity {
         } else{
           // 未登录
         }
+    }
+
+    /**
+     * 搜索商品监听
+     */
+    private void searchFoodButtonListener(){
+
+        searchFoodButton.setOnClickListener(v->{
+            String searchMsg = searchFoodEditText.getText().toString();
+            OKHttpUtils okHttpUtils = new OKHttpUtils();
+            Map<String,Object> map = new HashMap<>();
+            map.put("searchMsg",searchMsg);
+            okHttpUtils.post("/store/getByName",map);
+            okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
+                @Override
+                public void error(String error) {
+                    Toast.makeText(getApplicationContext(), "服务器出错啦，请稍后再试", Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void success(String json) {
+                    // json数组转list对象数组
+                    storeList = JSON.parseObject(json, new TypeReference<List<Store>>() {
+                    });
+
+                    // 初始化listview
+                    storeAdapter = new StoreAdapter(HomePageActivity.this, R.layout.store_item, storeList, imageLoader);
+                    listview = (ListView) findViewById(R.id.storeList_ListView);
+                    listview.setAdapter(storeAdapter);
+
+                    // 点击店铺
+                    clickStore();
+                }
+            });
+        });
     }
 }
