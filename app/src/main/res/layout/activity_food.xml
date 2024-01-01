@@ -116,9 +116,9 @@
                     android:id="@+id/monthSale_TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#848687"
                     android:layout_marginLeft="20dp"
-                    android:text="月售xxx+" />
+                    android:text="月售xxx+"
+                    android:textColor="#848687" />
 
             </LinearLayout>
 
@@ -152,11 +152,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
-            android:textColor="#848687"
             android:ellipsize="end"
             android:maxEms="25"
             android:maxLines="1"
-            android:text="店铺简介" />
+            android:text="店铺简介"
+            android:textColor="#848687" />
 
     </LinearLayout>
 
@@ -227,7 +227,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="450dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -253,6 +253,56 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:background="@drawable/stroke"
+        android:backgroundTint="#232426"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/order_AmountTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥0"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:textSize="25sp"
+                android:layout_marginLeft="60dp"/>
+
+            <TextView
+                android:id="@+id/delivery_NumTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#949595"
+                android:text="配送费￥3"
+                android:textStyle="bold"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="1dp"
+                android:layout_gravity="center"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/toPay_Button"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/round_corner"
+            android:enabled="false"
+            android:text="￥20起送"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

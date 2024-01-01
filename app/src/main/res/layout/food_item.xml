@@ -62,11 +62,33 @@
 
             <TextView
                 android:id="@+id/foodAmount_TextView"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:textColor="#FF0000"
                 android:layout_gravity="center"
                 android:text="XX.X"
+                android:textSize="20sp"/>
+
+            <ImageButton
+                android:id="@+id/removeFood_Button"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/remove"
+                android:background="#FFFFFF"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"/>
+
+
+            <TextView
+                android:id="@+id/foodNum_TextView"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:layout_gravity="center"
+                android:text="0"
+                android:layout_marginLeft="5dp"
                 android:textSize="20sp"/>
 
             <ImageButton
@@ -77,8 +99,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/add"
                 android:background="#FFFFFF"
-                android:layout_gravity="center"
-                android:layout_marginLeft="100dp"/>
+                android:layout_gravity="center"/>
 
         </LinearLayout>
 

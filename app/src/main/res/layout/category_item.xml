@@ -10,7 +10,7 @@
         android:layout_height="40dp"
         android:text="分类"
         android:gravity="center"
-        android:textColor="#878589"
+        android:textColor="#848687"
         android:textSize="18sp"/>
     
 </LinearLayout>
