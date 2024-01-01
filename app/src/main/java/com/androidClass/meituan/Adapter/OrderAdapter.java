@@ -1,5 +1,6 @@
 package com.androidClass.meituan.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ public class OrderAdapter extends ArrayAdapter {
         this.imageLoader = imageLoader;
     }
 
+    @SuppressLint("DefaultLocale")
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -82,7 +84,7 @@ public class OrderAdapter extends ArrayAdapter {
             // 店铺名
             orderStoreName.setText(orderDO.getStore().getStoreName());
             // 订单状态
-            orderStatus.setText(orderDO.getStatus().equals("0") ? "已完成":"未完成");
+            orderStatus.setText(orderDO.getStatus().equals("0") ? "已支付":"已完成");
             // 食物图片1
             orderFoodImageOne.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO.getFood().getFoodImg()));
             // 食物名字1
@@ -100,7 +102,7 @@ public class OrderAdapter extends ArrayAdapter {
             // 店铺名
             orderStoreName.setText(orderDO1.getStore().getStoreName());
             // 订单状态
-            orderStatus.setText(orderDO1.getStatus().equals("0") ? "已完成":"未完成");
+            orderStatus.setText(orderDO1.getStatus().equals("0") ? "已支付":"已完成");
             // 食物图片1
             imageLoader.displayImage(orderDO1.getFood().getFoodImg(), orderFoodImageOne, options);
 //            orderFoodImageOne.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO1.getFood().getFoodImg()));
@@ -116,7 +118,7 @@ public class OrderAdapter extends ArrayAdapter {
             orderAmount.setText(String.format(" ￥%s",amount));
             // 订单件数
             orderNum.setText("共 2 件");
-        }else if(orders.size() == 3){
+        }else if(orders.size() >= 3){
             Order orderDO1 = orders.get(0);
             Order orderDO2 = orders.get(1);
             Order orderDO3 = orders.get(2);
@@ -126,7 +128,7 @@ public class OrderAdapter extends ArrayAdapter {
             // 店铺名
             orderStoreName.setText(orderDO1.getStore().getStoreName());
             // 订单状态
-            orderStatus.setText(orderDO1.getStatus().equals("0") ? "已完成":"未完成");
+            orderStatus.setText(orderDO1.getStatus().equals("0") ? "已支付":"已完成");
             // 食物图片1
             imageLoader.displayImage(orderDO1.getFood().getFoodImg(), orderFoodImageOne, options);
 //            orderFoodImageOne.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO1.getFood().getFoodImg()));
@@ -143,10 +145,13 @@ public class OrderAdapter extends ArrayAdapter {
             // 食物名字3
             orderFoodNameThree.setText(orderDO3.getFood().getFoodName());
             // 订单金额
-            String amount = String.valueOf(orderDO1.getOrderAmount() + orderDO2.getOrderAmount() + orderDO3.getOrderAmount());
-            orderAmount.setText(String.format(" ￥%s",amount));
+            double sum = 0.0;
+            for (Order order : orders) {
+                sum+=order.getOrderAmount();
+            }
+            orderAmount.setText(String.format(" ￥%s",String.valueOf(sum)));
             // 订单件数
-            orderNum.setText("共 3 件");
+            orderNum.setText(String.format("共 %d 件",orders.size()));
         }
 
         return view;

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -27,9 +28,11 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.text.DecimalFormat;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class PayActivity extends AppCompatActivity {
 
@@ -49,6 +52,7 @@ public class PayActivity extends AppCompatActivity {
     private OrderFoodAdapter orderFoodAdapter;
     private Button toPayButton;
     private List<Food> foods;
+    private Store store;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,10 +141,10 @@ public class PayActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         String storeStr = (String) bundle.get("store");
         String allNum =(String) bundle.get("allNum");
-        Store store = JSON.parseObject(storeStr, new TypeReference<Store>() {
+        store = JSON.parseObject(storeStr, new TypeReference<Store>() {
         });
         storeNameTextView.setText(store.getStoreName());
-        takeOutNumTextView.setText(String.format("￥%s",store.getDeliveryNum()));
+        takeOutNumTextView.setText(String.format("￥%s", store.getDeliveryNum()));
         allNumTextView.setText(allNum);
         double a = Double.parseDouble(allNum.substring(1));
         double b = Double.parseDouble(store.getDeliveryNum());
@@ -169,6 +173,26 @@ public class PayActivity extends AppCompatActivity {
                 // TODO 发送请求生成订单
                 OKHttpUtils okHttpUtils = new OKHttpUtils();
                 Map<String,Object> map = new HashMap<>();
+                Integer storeId = store.getId();
+                Integer[] ids =  foods.stream().map(Food::getId).toArray(Integer[]::new);
+                String phoneNumber = (String) SPUtils.get(getApplicationContext(), "phoneNumber", "");
+                map.put("storeId",storeId);
+                map.put("ids",ids);
+                map.put("phoneNumber",phoneNumber);
+                okHttpUtils.POST_JSON("/order/generateOrder",map);
+                okHttpUtils.setOnOKHttpGetListener(new OKHttpUtils.OKHttpGetListener() {
+                    @Override
+                    public void error(String error) {
+                        Toast.makeText(getApplicationContext(), "服务器出错啦，请重试", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void success(String json) {
+                        String msg = JSON.parseObject(json, String.class);
+                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                    }
+                });
+                startActivity(new Intent(this, OrderActivity.class));
             });
             //设置否定按钮
             builder.setNegativeButton("取消",(dialog, which)->{

@@ -20,7 +20,7 @@ public class Order implements Serializable {
     private Integer storeId;
 
     //订单金额
-    private Integer orderAmount;
+    private Double orderAmount;
 
     //订单状态
     private String status;
@@ -128,11 +128,11 @@ public class Order implements Serializable {
         this.storeId = storeId;
     }
 
-    public Integer getOrderAmount() {
+    public Double getOrderAmount() {
         return orderAmount;
     }
 
-    public void setOrderAmount(Integer orderAmount) {
+    public void setOrderAmount(Double orderAmount) {
         this.orderAmount = orderAmount;
     }
 }
