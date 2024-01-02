@@ -86,11 +86,12 @@ public class OrderAdapter extends ArrayAdapter {
             // 订单状态
             orderStatus.setText(orderDO.getStatus().equals("0") ? "已支付":"已完成");
             // 食物图片1
-            orderFoodImageOne.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO.getFood().getFoodImg()));
+//            orderFoodImageOne.setImageResource(getImageResourceId.getImageResourceId(getContext(),orderDO.getFood().getFoodImg()));
+            imageLoader.displayImage(orderDO.getFood().getFoodImg(), orderFoodImageOne, options);
             // 食物名字1
             orderFoodNameOne.setText(orderDO.getFood().getFoodName());
             // 订单金额
-            orderAmount.setText(String.format(" ￥%d",orderDO.getOrderAmount()));
+            orderAmount.setText(String.format(" ￥%.2f",orderDO.getOrderAmount()));
             // 订单件数
             orderNum.setText("共 1 件");
         }else if(orders.size() == 2){
