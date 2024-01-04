@@ -72,15 +72,17 @@ public class StoreAdapter extends ArrayAdapter {
                 .cacheOnDisk(true)
                 .build();
 
-        imageLoader.displayImage(store.getImage(), holder.storeImage, options);
+        if (store !=null){
+            imageLoader.displayImage(store.getImage(), holder.storeImage, options);
 
-        holder.storeName.setText(store.getStoreName());//为文本视图设置文本内容
-        holder.storeScore.setText(String.format("%s分",store.getStoreScore()));// 店铺评分设置
-        holder.monthSale.setText(String.format("月售%s+",store.getMonthSale()));// 店铺月售设置
-        holder.peopleAvg.setText(String.format("人均 ￥%s",store.getPeopleAvg()));// 店铺人均设置
-        holder.minTakeOutNum.setText(String.format("起送 ￥%s",store.getMinTakeOutNum()));// 店铺起送价格
-        holder.deliveryNum.setText(String.format("配送 约 ￥%s",store.getDeliveryNum()));// 店铺配送费设置
-        holder.comment.setText(store.getComment());// 店铺评价设置
+            holder.storeName.setText(store.getStoreName());//为文本视图设置文本内容
+            holder.storeScore.setText(String.format("%s分",store.getStoreScore()));// 店铺评分设置
+            holder.monthSale.setText(String.format("月售%s+",store.getMonthSale()));// 店铺月售设置
+            holder.peopleAvg.setText(String.format("人均 ￥%s",store.getPeopleAvg()));// 店铺人均设置
+            holder.minTakeOutNum.setText(String.format("起送 ￥%s",store.getMinTakeOutNum()));// 店铺起送价格
+            holder.deliveryNum.setText(String.format("配送 约 ￥%s",store.getDeliveryNum()));// 店铺配送费设置
+            holder.comment.setText(store.getComment());// 店铺评价设置
+        }
 
         return convertView;
     }
