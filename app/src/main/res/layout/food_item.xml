@@ -62,12 +62,12 @@
 
             <TextView
                 android:id="@+id/foodAmount_TextView"
-                android:layout_width="50dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:textColor="#FF0000"
                 android:layout_gravity="center"
                 android:text="XX.X"
-                android:textSize="20sp"/>
+                android:textSize="18sp"/>
 
             <ImageButton
                 android:id="@+id/removeFood_Button"
